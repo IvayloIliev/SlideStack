@@ -20,6 +20,8 @@ xcuserdata/
 ## Other
 *.moved-aside
 *.xcuserstate
+*.DS_Store
+*.xcbkptlist
 
 ## Obj-C/Swift specific
 *.hmap
@@ -37,10 +39,9 @@ xcuserdata/
 
 # Carthage
 #
+# Carthage/Build
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
-# Carthage/Checkouts
-
-Carthage/Build
+Carthage/Checkouts
 
 # fastlane
 #
