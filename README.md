@@ -1,1 +1,1 @@
-# SlideStackController
+# SlideStack
