@@ -17,4 +17,8 @@
 
 +(SlideCell*) getCell;
 
+-(void)setDescription:(NSString *)description;
+-(void)setImage:(UIImage *)image;
+-(void)setTitle:(NSString *)title;
+
 @end

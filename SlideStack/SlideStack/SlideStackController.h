@@ -11,4 +11,7 @@
 @interface SlideStackController : UIViewController
 @property (weak, nonatomic) IBOutlet UIStackView *stackView;
 
+
+
+
 @end

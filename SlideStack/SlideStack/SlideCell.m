@@ -8,6 +8,7 @@
 
 #import "SlideCell.h"
 #import "Defines.h"
+
 @implementation SlideCell
 
 /*
@@ -17,6 +18,7 @@
     // Drawing code
 }
 */
+
 +(SlideCell *)getCell
 {
     SlideCell* myViewObject = [[[NSBundle bundleWithIdentifier:BUNDLE_ID_STRING] loadNibNamed:@"SlideCell" owner:self options:nil] firstObject];
@@ -51,5 +53,19 @@
     [bodyPath closePath];
     [[UIColor colorWithWhite:0.1 alpha:0.8] setFill];
     [bodyPath fill];
+}
+-(void) setDescription:(NSString *)description
+{
+    [self.descriptionTextView setText:description];
+}
+
+-(void) setTitle:(NSString *)title
+{
+    [self.titleLabel setText:title];
+}
+
+-(void) setImage:(UIImage *)image
+{
+    [self.imageView setImage:image];
 }
 @end

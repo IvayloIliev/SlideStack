@@ -30,34 +30,43 @@
     [super viewDidLoad];
 
     SlideCell *cell1 = [SlideCell getCell];
+    cell1.backgroundColor = [UIColor blueColor];
+    [cell1 setTitle:@"asd"];
+    
     SlideCell *cell2 = [SlideCell getCell];
+    cell2.backgroundColor = [UIColor greenColor];
+    
     SlideCell *cell3 = [SlideCell getCell];
-    SlideCell *cell4 = [SlideCell getCell];
+    cell3.backgroundColor = [UIColor yellowColor];
     
-    [self.stackView addArrangedSubview:cell1];
-    [self.stackView addArrangedSubview:cell2];
-    [self.stackView addArrangedSubview:cell3];
-    [self.stackView addArrangedSubview:cell4];
-    
-    //Layout for Stack View
+    [self addSlideCell:cell1];
+    [self addSlideCell:cell2];
+    [self addSlideCell:cell3];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+}
+
+-(void) addSlideCell:(SlideCell*)newCell
+{
+    [self.stackView addArrangedSubview:newCell];
+}
+
+-(void) stackViewSetup
+{
     self.stackView.axis = UILayoutConstraintAxisVertical;
     self.stackView.distribution = UIStackViewDistributionEqualSpacing;
     self.stackView.alignment = UIStackViewAlignmentCenter;
-    self.stackView.spacing = 5;
+    self.stackView.spacing = -20;
     self.stackView.translatesAutoresizingMaskIntoConstraints = false;
     
+    // Stack location on screen
     [self.view addSubview:self.stackView];
     [self.stackView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = true;
     [self.stackView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = true;
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-    
-    
-}
-
 /*
 #pragma mark - Navigation
 
