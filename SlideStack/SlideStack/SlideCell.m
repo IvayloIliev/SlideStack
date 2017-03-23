@@ -22,8 +22,34 @@
     SlideCell* myViewObject = [[[NSBundle bundleWithIdentifier:BUNDLE_ID_STRING] loadNibNamed:@"SlideCell" owner:self options:nil] firstObject];
     
     [myViewObject.heightAnchor constraintEqualToConstant:100].active = true;
-    [myViewObject.widthAnchor constraintEqualToConstant:120].active = true;
+    [myViewObject.widthAnchor constraintEqualToConstant:300].active = true;
+    myViewObject.backgroundColor = [UIColor clearColor];
     
     return myViewObject;
+}
+
+-(void)drawRect:(CGRect)rect
+{
+    UIBezierPath *trianglePath = [UIBezierPath bezierPath];
+    
+    [trianglePath moveToPoint:CGPointMake(rect.size.width/1.6, 0)];
+    [trianglePath addLineToPoint:CGPointMake(rect.size.width/1.1,0)];
+    [trianglePath addLineToPoint:CGPointMake(rect.size.width, rect.size.height/2)];
+    [trianglePath addLineToPoint:CGPointMake(rect.size.width/1.1, rect.size.height)];
+    [trianglePath addLineToPoint:CGPointMake(rect.size.width/1.6, rect.size.height)];
+    [trianglePath addLineToPoint:CGPointMake(rect.size.width/1.4, rect.size.height/2)];
+    [trianglePath closePath];
+    [[UIColor blackColor] setFill];
+    [trianglePath fill];
+    
+    UIBezierPath *bodyPath = [UIBezierPath bezierPath];
+    [bodyPath moveToPoint:CGPointMake(0,0)];
+    [bodyPath addLineToPoint:CGPointMake(rect.size.width/1.6, 0)];
+    [bodyPath addLineToPoint:CGPointMake(rect.size.width/1.4, rect.size.height/2)];
+    [bodyPath addLineToPoint:CGPointMake(rect.size.width/1.6, rect.size.height)];
+    [bodyPath addLineToPoint:CGPointMake(0, rect.size.height)];
+    [bodyPath closePath];
+    [[UIColor colorWithWhite:0.1 alpha:0.8] setFill];
+    [bodyPath fill];
 }
 @end
