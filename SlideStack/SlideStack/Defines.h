@@ -9,5 +9,6 @@
 #ifndef Defines_h
 #define Defines_h
 
+#define BUNDLE_ID_STRING @"net.nemetschek.SlideStack"
 
 #endif /* Defines_h */

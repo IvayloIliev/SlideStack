@@ -7,6 +7,8 @@
 //
 
 #import "SlideStackController.h"
+#import "SlideCell.h"
+#import "Defines.h"
 
 @interface SlideStackController ()
 
@@ -14,14 +16,54 @@
 
 @implementation SlideStackController
 
+-(instancetype)init
+{
+    self = [super initWithNibName:@"SlideStackController" bundle:[NSBundle bundleWithIdentifier:BUNDLE_ID_STRING]];
+    if (self)
+    {
+        
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    SlideCell *cell1 = [SlideCell getCell];
+    cell1.backgroundColor = [UIColor blueColor];
+    
+    SlideCell *cell2 = [SlideCell getCell];
+    cell2.backgroundColor = [UIColor greenColor];
+    
+    SlideCell *cell3 = [SlideCell getCell];
+    cell3.backgroundColor = [UIColor yellowColor];
+    
+    self.stackView.axis = UILayoutConstraintAxisVertical;
+    self.stackView.distribution = UIStackViewDistributionEqualSpacing;
+    self.stackView.alignment = UIStackViewAlignmentCenter;
+    self.stackView.spacing = -80;
+    
+    SlideCell *cell4 = [SlideCell getCell];
+    
+    [self.stackView addArrangedSubview:cell1];
+    [self.stackView addArrangedSubview:cell2];
+    [self.stackView addArrangedSubview:cell3];
+    [self.stackView addArrangedSubview:cell4];
+    
+    self.stackView.translatesAutoresizingMaskIntoConstraints = false;
+    
+    //Layout for Stack View
+  
+    [self.view addSubview:self.stackView];
+    [self.stackView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = true;
+    [self.stackView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = true;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
+    
 }
 
 /*

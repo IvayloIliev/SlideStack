@@ -7,7 +7,7 @@
 //
 
 #import "SlideCell.h"
-
+#import "Defines.h"
 @implementation SlideCell
 
 /*
@@ -17,5 +17,13 @@
     // Drawing code
 }
 */
-
++(SlideCell *)getCell
+{
+    SlideCell* myViewObject = [[[NSBundle bundleWithIdentifier:BUNDLE_ID_STRING] loadNibNamed:@"SlideCell" owner:self options:nil] firstObject];
+    
+    [myViewObject.heightAnchor constraintEqualToConstant:100].active = true;
+    [myViewObject.widthAnchor constraintEqualToConstant:120].active = true;
+    
+    return myViewObject;
+}
 @end

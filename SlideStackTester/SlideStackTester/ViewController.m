@@ -7,8 +7,11 @@
 //
 
 #import "ViewController.h"
+#import <SlideStack/SlideStack.h>
 
 @interface ViewController ()
+
+@property (strong, nonatomic) SlideStackController *slideStack;
 
 @end
 
@@ -17,6 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    self.slideStack = [[SlideStackController alloc] init];
+    [self.view addSubview:self.slideStack.view];
 }
 
 

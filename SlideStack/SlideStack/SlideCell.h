@@ -10,4 +10,11 @@
 
 @interface SlideCell : UIView
 
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
+
++(SlideCell*) getCell;
+
 @end

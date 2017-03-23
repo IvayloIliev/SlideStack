@@ -10,21 +10,21 @@
 		4B4802551E82B79000272C15 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4802541E82B79000272C15 /* main.m */; };
 		4B4802581E82B79000272C15 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B4802571E82B79000272C15 /* AppDelegate.m */; };
 		4B48025B1E82B79000272C15 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B48025A1E82B79000272C15 /* ViewController.m */; };
-		4B48025E1E82B79000272C15 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B48025C1E82B79000272C15 /* Main.storyboard */; };
 		4B4802601E82B79000272C15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B48025F1E82B79000272C15 /* Assets.xcassets */; };
 		4B4802631E82B79000272C15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B4802611E82B79000272C15 /* LaunchScreen.storyboard */; };
-		4B4802701E82B80D00272C15 /* SlideStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B48026F1E82B80D00272C15 /* SlideStack.framework */; };
-		4B4802711E82B80D00272C15 /* SlideStack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B48026F1E82B80D00272C15 /* SlideStack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B526AF381E83C00E009C78CB /* SlideStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B526AF371E83C00E009C78CB /* SlideStack.framework */; };
+		B526AF391E83C00E009C78CB /* SlideStack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B526AF371E83C00E009C78CB /* SlideStack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B526AF491E83D629009C78CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B526AF471E83D629009C78CB /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		4B4802721E82B80D00272C15 /* Embed Frameworks */ = {
+		B526AF3A1E83C00E009C78CB /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				4B4802711E82B80D00272C15 /* SlideStack.framework in Embed Frameworks */,
+				B526AF391E83C00E009C78CB /* SlideStack.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -38,11 +38,11 @@
 		4B4802571E82B79000272C15 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4B4802591E82B79000272C15 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		4B48025A1E82B79000272C15 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		4B48025D1E82B79000272C15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4B48025F1E82B79000272C15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4B4802621E82B79000272C15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4B4802641E82B79000272C15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4B48026F1E82B80D00272C15 /* SlideStack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SlideStack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B526AF371E83C00E009C78CB /* SlideStack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SlideStack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B526AF481E83D629009C78CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B4802701E82B80D00272C15 /* SlideStack.framework in Frameworks */,
+				B526AF381E83C00E009C78CB /* SlideStack.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,9 +81,9 @@
 				4B4802571E82B79000272C15 /* AppDelegate.m */,
 				4B4802591E82B79000272C15 /* ViewController.h */,
 				4B48025A1E82B79000272C15 /* ViewController.m */,
-				4B48025C1E82B79000272C15 /* Main.storyboard */,
 				4B48025F1E82B79000272C15 /* Assets.xcassets */,
 				4B4802611E82B79000272C15 /* LaunchScreen.storyboard */,
+				B526AF471E83D629009C78CB /* Main.storyboard */,
 				4B4802641E82B79000272C15 /* Info.plist */,
 				4B4802531E82B79000272C15 /* Supporting Files */,
 			);
@@ -101,7 +101,7 @@
 		4B48026E1E82B7FD00272C15 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4B48026F1E82B80D00272C15 /* SlideStack.framework */,
+				B526AF371E83C00E009C78CB /* SlideStack.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -116,7 +116,7 @@
 				4B48024C1E82B79000272C15 /* Sources */,
 				4B48024D1E82B79000272C15 /* Frameworks */,
 				4B48024E1E82B79000272C15 /* Resources */,
-				4B4802721E82B80D00272C15 /* Embed Frameworks */,
+				B526AF3A1E83C00E009C78CB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -165,9 +165,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B526AF491E83D629009C78CB /* Main.storyboard in Resources */,
 				4B4802631E82B79000272C15 /* LaunchScreen.storyboard in Resources */,
 				4B4802601E82B79000272C15 /* Assets.xcassets in Resources */,
-				4B48025E1E82B79000272C15 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,20 +187,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4B48025C1E82B79000272C15 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4B48025D1E82B79000272C15 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		4B4802611E82B79000272C15 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				4B4802621E82B79000272C15 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		B526AF471E83D629009C78CB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B526AF481E83D629009C78CB /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

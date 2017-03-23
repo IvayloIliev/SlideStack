@@ -10,6 +10,13 @@
 		4B4802371E82B75D00272C15 /* SlideStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B48022D1E82B75C00272C15 /* SlideStack.framework */; };
 		4B48023C1E82B75D00272C15 /* SlideStackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B48023B1E82B75D00272C15 /* SlideStackTests.m */; };
 		4B48023E1E82B75D00272C15 /* SlideStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B4802301E82B75C00272C15 /* SlideStack.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B526AF2D1E83BF82009C78CB /* PublicHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = B526AF2C1E83BF82009C78CB /* PublicHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B526AF311E83BF88009C78CB /* SlideStackController.h in Headers */ = {isa = PBXBuildFile; fileRef = B526AF2E1E83BF88009C78CB /* SlideStackController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B526AF321E83BF88009C78CB /* SlideStackController.m in Sources */ = {isa = PBXBuildFile; fileRef = B526AF2F1E83BF88009C78CB /* SlideStackController.m */; };
+		B526AF331E83BF88009C78CB /* SlideStackController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B526AF301E83BF88009C78CB /* SlideStackController.xib */; };
+		B526AF431E83D2B3009C78CB /* SlideCell.h in Headers */ = {isa = PBXBuildFile; fileRef = B526AF411E83D2B3009C78CB /* SlideCell.h */; };
+		B526AF441E83D2B3009C78CB /* SlideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B526AF421E83D2B3009C78CB /* SlideCell.m */; };
+		B526AF461E83D2C4009C78CB /* SlideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B526AF451E83D2C4009C78CB /* SlideCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +36,14 @@
 		4B4802361E82B75D00272C15 /* SlideStackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlideStackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B48023B1E82B75D00272C15 /* SlideStackTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SlideStackTests.m; sourceTree = "<group>"; };
 		4B48023D1E82B75D00272C15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B526AF2C1E83BF82009C78CB /* PublicHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublicHeader.h; sourceTree = "<group>"; };
+		B526AF2E1E83BF88009C78CB /* SlideStackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideStackController.h; sourceTree = "<group>"; };
+		B526AF2F1E83BF88009C78CB /* SlideStackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideStackController.m; sourceTree = "<group>"; };
+		B526AF301E83BF88009C78CB /* SlideStackController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideStackController.xib; sourceTree = "<group>"; };
+		B526AF411E83D2B3009C78CB /* SlideCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideCell.h; sourceTree = "<group>"; };
+		B526AF421E83D2B3009C78CB /* SlideCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideCell.m; sourceTree = "<group>"; };
+		B526AF451E83D2C4009C78CB /* SlideCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideCell.xib; sourceTree = "<group>"; };
+		B526AF4A1E83E528009C78CB /* Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,8 +86,16 @@
 		4B48022F1E82B75C00272C15 /* SlideStack */ = {
 			isa = PBXGroup;
 			children = (
+				B526AF2C1E83BF82009C78CB /* PublicHeader.h */,
 				4B4802301E82B75C00272C15 /* SlideStack.h */,
+				B526AF2E1E83BF88009C78CB /* SlideStackController.h */,
+				B526AF2F1E83BF88009C78CB /* SlideStackController.m */,
+				B526AF301E83BF88009C78CB /* SlideStackController.xib */,
 				4B4802311E82B75C00272C15 /* Info.plist */,
+				B526AF411E83D2B3009C78CB /* SlideCell.h */,
+				B526AF421E83D2B3009C78CB /* SlideCell.m */,
+				B526AF451E83D2C4009C78CB /* SlideCell.xib */,
+				B526AF4A1E83E528009C78CB /* Defines.h */,
 			);
 			path = SlideStack;
 			sourceTree = "<group>";
@@ -93,7 +116,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B526AF2D1E83BF82009C78CB /* PublicHeader.h in Headers */,
 				4B48023E1E82B75D00272C15 /* SlideStack.h in Headers */,
+				B526AF431E83D2B3009C78CB /* SlideCell.h in Headers */,
+				B526AF311E83BF88009C78CB /* SlideStackController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,6 +204,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B526AF331E83BF88009C78CB /* SlideStackController.xib in Resources */,
+				B526AF461E83D2C4009C78CB /* SlideCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,6 +223,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B526AF321E83BF88009C78CB /* SlideStackController.m in Sources */,
+				B526AF441E83D2B3009C78CB /* SlideCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +288,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -303,7 +333,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -323,6 +353,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = SlideStack/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.nemetschek.SlideStack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -340,6 +371,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = SlideStack/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.nemetschek.SlideStack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -386,6 +418,7 @@
 				4B4802431E82B75D00272C15 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4B4802441E82B75D00272C15 /* Build configuration list for PBXNativeTarget "SlideStackTests" */ = {
 			isa = XCConfigurationList;
@@ -394,6 +427,7 @@
 				4B4802461E82B75D00272C15 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
