@@ -30,19 +30,8 @@
     [super viewDidLoad];
 
     SlideCell *cell1 = [SlideCell getCell];
-    cell1.backgroundColor = [UIColor blueColor];
-    
     SlideCell *cell2 = [SlideCell getCell];
-    cell2.backgroundColor = [UIColor greenColor];
-    
     SlideCell *cell3 = [SlideCell getCell];
-    cell3.backgroundColor = [UIColor yellowColor];
-    
-    self.stackView.axis = UILayoutConstraintAxisVertical;
-    self.stackView.distribution = UIStackViewDistributionEqualSpacing;
-    self.stackView.alignment = UIStackViewAlignmentCenter;
-    self.stackView.spacing = -80;
-    
     SlideCell *cell4 = [SlideCell getCell];
     
     [self.stackView addArrangedSubview:cell1];
@@ -50,10 +39,13 @@
     [self.stackView addArrangedSubview:cell3];
     [self.stackView addArrangedSubview:cell4];
     
+    //Layout for Stack View
+    self.stackView.axis = UILayoutConstraintAxisVertical;
+    self.stackView.distribution = UIStackViewDistributionEqualSpacing;
+    self.stackView.alignment = UIStackViewAlignmentCenter;
+    self.stackView.spacing = 5;
     self.stackView.translatesAutoresizingMaskIntoConstraints = false;
     
-    //Layout for Stack View
-  
     [self.view addSubview:self.stackView];
     [self.stackView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = true;
     [self.stackView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = true;
