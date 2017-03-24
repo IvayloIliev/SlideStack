@@ -11,7 +11,7 @@
 #import "Defines.h"
 
 @interface SlideStackController ()
-
+@property NSMutableArray *cellList;
 @end
 
 @implementation SlideStackController
@@ -21,7 +21,7 @@
     self = [super initWithNibName:@"SlideStackController" bundle:[NSBundle bundleWithIdentifier:BUNDLE_ID_STRING]];
     if (self)
     {
-        
+        self.cellList = [[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -30,18 +30,36 @@
     [super viewDidLoad];
 
     SlideCell *cell1 = [SlideCell getCell];
-    cell1.backgroundColor = [UIColor blueColor];
-    [cell1 setTitle:@"asd"];
-    
+    cell1.delegate = self;
+    [cell1 setTitle:@"CELL 1"];
+    [self addSlideCell:cell1];
+
     SlideCell *cell2 = [SlideCell getCell];
-    cell2.backgroundColor = [UIColor greenColor];
+    cell2.delegate = self;
+    [cell2 setTitle:@"CELL 2"];
+    [self addSlideCell:cell2];
     
     SlideCell *cell3 = [SlideCell getCell];
-    cell3.backgroundColor = [UIColor yellowColor];
-    
-    [self addSlideCell:cell1];
-    [self addSlideCell:cell2];
+    cell3.delegate = self;
+    [cell3 setTitle:@"CELL 3"];
     [self addSlideCell:cell3];
+}
+
+-(void) addSlideCell:(SlideCell*)newCell
+{
+    [self.cellList addObject:newCell];
+    [self.view addSubview:newCell];
+    [self formatCell:newCell];
+}
+
+-(void)formatCell:(SlideCell*)newCell
+{
+    int a = START_TOP_MARGIN +((self.cellList.count+1) * CELL_HEIGHT);
+    CGRect newFrame = CGRectMake(newCell.frame.origin.x + COLAPSE_DISTANCE,
+                                 START_TOP_MARGIN +((self.cellList.count) * CELL_HEIGHT)
+                                 ,newCell.frame.size.width , newCell.frame.size.height);
+    newCell.frame = newFrame;
+    newCell.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,32 +67,57 @@
     [super didReceiveMemoryWarning];
 }
 
--(void) addSlideCell:(SlideCell*)newCell
+-(void)onTap:(SlideCell *)cell
 {
-    [self.stackView addArrangedSubview:newCell];
+    if(cell.cellState == CELL_STATE_COLAPSED)
+    {
+        [self collapseAllCells];
+        [self expandCell:cell];
+    }
+    else if(cell.cellState == CELL_STATE_EXPANDED)
+    {
+        [self collapseCell:cell];
+    }
 }
 
--(void) stackViewSetup
+-(void)collapseAllCells
 {
-    self.stackView.axis = UILayoutConstraintAxisVertical;
-    self.stackView.distribution = UIStackViewDistributionEqualSpacing;
-    self.stackView.alignment = UIStackViewAlignmentCenter;
-    self.stackView.spacing = -20;
-    self.stackView.translatesAutoresizingMaskIntoConstraints = false;
-    
-    // Stack location on screen
-    [self.view addSubview:self.stackView];
-    [self.stackView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = true;
-    [self.stackView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = true;
+    for (SlideCell *cell in self.cellList) {
+        if(cell.cellState == CELL_STATE_EXPANDED)
+        {
+            [self collapseCell:cell];
+        }
+    }
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)collapseCell:(SlideCell*)cell
+{
+    cell.cellState = CELL_STATE_COLAPSED;
+    [UIView animateWithDuration:0.5
+                          delay:0.1
+                        options: UIViewAnimationCurveEaseOut
+                     animations:^
+     {
+         CGRect collapsedFrame = CGRectMake(cell.frame.origin.x + (COLAPSE_DISTANCE) , cell.frame.origin.y, cell.frame.size.width , cell.frame.size.height);
+
+         cell.frame = collapsedFrame;
+     }
+                    completion:nil];
 }
-*/
+
+-(void)expandCell:(SlideCell*)cell
+{
+    cell.cellState = CELL_STATE_EXPANDED;
+    [UIView animateWithDuration:0.5
+                          delay:0.1
+                        options: UIViewAnimationCurveEaseOut
+                     animations:^
+     {
+         CGRect collapsedFrame = CGRectMake(cell.frame.origin.x + (COLAPSE_DISTANCE*(-1)) , cell.frame.origin.y, cell.frame.size.width , cell.frame.size.height);
+         
+         cell.frame = collapsedFrame;
+     }
+                     completion:nil];
+}
 
 @end

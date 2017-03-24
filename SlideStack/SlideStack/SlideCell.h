@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PublicProtocols.h"
+
+
 
 @interface SlideCell : UIView
 
@@ -14,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
+@property (nonatomic, weak) id <SlideCellDelegate> delegate;
+@property NSInteger *cellState;
 
 +(SlideCell*) getCell;
 
@@ -22,3 +27,4 @@
 -(void)setTitle:(NSString *)title;
 
 @end
+

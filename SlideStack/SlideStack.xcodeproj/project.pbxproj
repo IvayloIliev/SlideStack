@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1DBB7A8D1E854DA200D99FBB /* PublicProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DBB7A8C1E854D5600D99FBB /* PublicProtocols.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4B4802371E82B75D00272C15 /* SlideStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B48022D1E82B75C00272C15 /* SlideStack.framework */; };
 		4B48023C1E82B75D00272C15 /* SlideStackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B48023B1E82B75D00272C15 /* SlideStackTests.m */; };
 		4B48023E1E82B75D00272C15 /* SlideStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B4802301E82B75C00272C15 /* SlideStack.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1DBB7A8C1E854D5600D99FBB /* PublicProtocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicProtocols.h; sourceTree = "<group>"; };
 		4B48022D1E82B75C00272C15 /* SlideStack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SlideStack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B4802301E82B75C00272C15 /* SlideStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlideStack.h; sourceTree = "<group>"; };
 		4B4802311E82B75C00272C15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -70,7 +72,6 @@
 			children = (
 				4B48022F1E82B75C00272C15 /* SlideStack */,
 				4B48023A1E82B75D00272C15 /* SlideStackTests */,
-				4B48022E1E82B75C00272C15 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,12 +82,14 @@
 				4B4802361E82B75D00272C15 /* SlideStackTests.xctest */,
 			);
 			name = Products;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		4B48022F1E82B75C00272C15 /* SlideStack */ = {
 			isa = PBXGroup;
 			children = (
 				B526AF2C1E83BF82009C78CB /* PublicHeader.h */,
+				1DBB7A8C1E854D5600D99FBB /* PublicProtocols.h */,
 				4B4802301E82B75C00272C15 /* SlideStack.h */,
 				B526AF2E1E83BF88009C78CB /* SlideStackController.h */,
 				B526AF2F1E83BF88009C78CB /* SlideStackController.m */,
@@ -103,6 +106,7 @@
 		4B48023A1E82B75D00272C15 /* SlideStackTests */ = {
 			isa = PBXGroup;
 			children = (
+				4B48022E1E82B75C00272C15 /* Products */,
 				4B48023B1E82B75D00272C15 /* SlideStackTests.m */,
 				4B48023D1E82B75D00272C15 /* Info.plist */,
 			);
@@ -118,8 +122,9 @@
 			files = (
 				B526AF2D1E83BF82009C78CB /* PublicHeader.h in Headers */,
 				4B48023E1E82B75D00272C15 /* SlideStack.h in Headers */,
-				B526AF431E83D2B3009C78CB /* SlideCell.h in Headers */,
 				B526AF311E83BF88009C78CB /* SlideStackController.h in Headers */,
+				1DBB7A8D1E854DA200D99FBB /* PublicProtocols.h in Headers */,
+				B526AF431E83D2B3009C78CB /* SlideCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

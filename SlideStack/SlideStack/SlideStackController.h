@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PublicProtocols.h"
 
-@interface SlideStackController : UIViewController
+
+
+@interface SlideStackController : UIViewController<SlideCellDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIStackView *stackView;
-
-
-
 
 @end
