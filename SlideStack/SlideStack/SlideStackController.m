@@ -67,11 +67,11 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma DELEGATES
 -(void)onTap:(SlideCell *)cell
 {
     if(cell.cellState == CELL_STATE_COLAPSED)
     {
-        [self collapseAllCells];
         [self expandCell:cell];
     }
     else if(cell.cellState == CELL_STATE_EXPANDED)
@@ -79,6 +79,34 @@
         [self collapseCell:cell];
     }
 }
+
+-(void)drag:(UIPanGestureRecognizer *)drag onCell:(SlideCell *)cell
+{
+    if(drag.state == UIGestureRecognizerStateBegan)
+    {
+        cell.pointerStartDragCoordinatesX = [drag locationInView:cell.window].x;
+        cell.cellStartDragCoordinatesX = cell.frame.origin.x;
+    }
+    
+    float currentPointerDistance = [drag locationInView:cell.window].x - cell.pointerStartDragCoordinatesX;
+    CGRect collapsedFrame = CGRectMake(cell.cellStartDragCoordinatesX + currentPointerDistance,
+                                       cell.frame.origin.y, cell.frame.size.width , cell.frame.size.height);
+    cell.frame = collapsedFrame;
+    
+    if(drag.state == UIGestureRecognizerStateEnded)
+    {
+        if(currentPointerDistance >= CELL_DRAG_TOLARANCE)
+        {
+            [self expandCell:cell];
+        }
+        else
+        {
+            [self collapseCell:cell];
+        }
+    }
+}
+#pragma END DELEGATES
+
 
 -(void)collapseAllCells
 {
@@ -98,7 +126,7 @@
                         options: UIViewAnimationCurveEaseOut
                      animations:^
      {
-         CGRect collapsedFrame = CGRectMake(cell.frame.origin.x + (COLAPSE_DISTANCE) , cell.frame.origin.y, cell.frame.size.width , cell.frame.size.height);
+         CGRect collapsedFrame = CGRectMake(COLAPSE_DISTANCE, cell.frame.origin.y, cell.frame.size.width , cell.frame.size.height);
 
          cell.frame = collapsedFrame;
      }
@@ -107,13 +135,14 @@
 
 -(void)expandCell:(SlideCell*)cell
 {
+    [self collapseAllCells];
     cell.cellState = CELL_STATE_EXPANDED;
     [UIView animateWithDuration:0.5
                           delay:0.1
                         options: UIViewAnimationCurveEaseOut
                      animations:^
      {
-         CGRect collapsedFrame = CGRectMake(cell.frame.origin.x + (COLAPSE_DISTANCE*(-1)) , cell.frame.origin.y, cell.frame.size.width , cell.frame.size.height);
+         CGRect collapsedFrame = CGRectMake(0 , cell.frame.origin.y, cell.frame.size.width , cell.frame.size.height);
          
          cell.frame = collapsedFrame;
      }

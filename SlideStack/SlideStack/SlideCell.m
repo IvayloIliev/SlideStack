@@ -31,14 +31,24 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:newCell
                                    action:@selector(tapped:)];
-
+    
+    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc]
+                                             initWithTarget:newCell
+                                             action:@selector(dragged:)];
+    
     [newCell addGestureRecognizer:tap];
+    [newCell addGestureRecognizer:panRecognizer];
     return newCell;
 }
 
 -(void) tapped:(UITapGestureRecognizer*)tap
 {
     [self.delegate onTap:self];
+}
+
+-(void)dragged:(UIPanGestureRecognizer*)drag
+{
+     [self.delegate drag:drag onCell:self];
 }
 
 -(void)drawRect:(CGRect)rect

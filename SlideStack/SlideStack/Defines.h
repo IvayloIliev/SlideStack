@@ -20,4 +20,5 @@
 #define CELL_HEIGHT 100
 #define CELL_WIDTH 300
 
+#define CELL_DRAG_TOLARANCE 50
 #endif /* Defines_h */

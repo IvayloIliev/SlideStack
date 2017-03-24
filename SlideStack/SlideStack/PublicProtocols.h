@@ -17,5 +17,6 @@
 @protocol SlideCellDelegate
 
 -(void) onTap:(SlideCell*) cell;
+-(void) drag:(UIPanGestureRecognizer*) drag onCell:(SlideCell*)cell;
 
 @end

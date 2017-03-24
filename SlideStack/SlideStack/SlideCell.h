@@ -18,6 +18,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @property (nonatomic, weak) id <SlideCellDelegate> delegate;
+@property float pointerStartDragCoordinatesX;
+@property float cellStartDragCoordinatesX;
+
 @property NSInteger *cellState;
 
 +(SlideCell*) getCell;
