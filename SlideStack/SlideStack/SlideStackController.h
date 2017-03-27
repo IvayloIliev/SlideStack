@@ -13,7 +13,9 @@
 
 @interface SlideStackController : UIViewController<SlideCellDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIStackView *stackView;
+@property NSInteger *cellMargin;
+
+//Use negetive values for overlap
+-(void) setMargin:(NSInteger*) margin;
 
 @end

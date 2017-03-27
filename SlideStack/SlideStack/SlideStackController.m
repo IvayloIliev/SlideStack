@@ -28,7 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    [self setMargin:15];
+    
     SlideCell *cell1 = [SlideCell getCell];
     cell1.delegate = self;
     [cell1 setTitle:@"CELL 1"];
@@ -45,6 +46,11 @@
     [self addSlideCell:cell3];
 }
 
+-(void)setMargin:(NSInteger *)margin
+{
+    self.cellMargin = margin;
+}
+
 -(void) addSlideCell:(SlideCell*)newCell
 {
     [self.cellList addObject:newCell];
@@ -54,9 +60,9 @@
 
 -(void)formatCell:(SlideCell*)newCell
 {
-    CGRect newFrame = CGRectMake(newCell.frame.origin.x + COLAPSE_DISTANCE,
-                                 START_TOP_MARGIN +((self.cellList.count) * CELL_HEIGHT)
-                                 ,newCell.frame.size.width , newCell.frame.size.height);
+      CGRect newFrame = CGRectMake(newCell.frame.origin.x + COLAPSE_DISTANCE,
+                                     START_TOP_MARGIN +((self.cellList.count) * CELL_HEIGHT) - ((long)self.cellMargin*(self.cellList.count))
+                                     ,newCell.frame.size.width , newCell.frame.size.height);
     newCell.frame = newFrame;
     newCell.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
 }
