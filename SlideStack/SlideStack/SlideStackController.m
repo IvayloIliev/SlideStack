@@ -54,7 +54,6 @@
 
 -(void)formatCell:(SlideCell*)newCell
 {
-    int a = START_TOP_MARGIN +((self.cellList.count+1) * CELL_HEIGHT);
     CGRect newFrame = CGRectMake(newCell.frame.origin.x + COLAPSE_DISTANCE,
                                  START_TOP_MARGIN +((self.cellList.count) * CELL_HEIGHT)
                                  ,newCell.frame.size.width , newCell.frame.size.height);
@@ -67,7 +66,7 @@
     [super didReceiveMemoryWarning];
 }
 
-#pragma DELEGATES
+#pragma mark DELEGATES
 -(void)onTap:(SlideCell *)cell
 {
     if(cell.cellState == CELL_STATE_COLAPSED)
@@ -105,7 +104,7 @@
         }
     }
 }
-#pragma END DELEGATES
+#pragma mark END DELEGATES
 
 
 -(void)collapseAllCells

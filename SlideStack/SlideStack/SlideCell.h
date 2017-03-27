@@ -21,7 +21,7 @@
 @property float pointerStartDragCoordinatesX;
 @property float cellStartDragCoordinatesX;
 
-@property NSInteger *cellState;
+@property NSInteger cellState;
 
 +(SlideCell*) getCell;
 
