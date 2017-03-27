@@ -55,24 +55,24 @@
 {
     UIBezierPath *trianglePath = [UIBezierPath bezierPath];
     
-    [trianglePath moveToPoint:CGPointMake(rect.size.width / 1.6, 0)];
-    [trianglePath addLineToPoint:CGPointMake(rect.size.width/1.1,0)];
+    [trianglePath moveToPoint:CGPointMake(rect.size.width - ARROW_WIDTH, 0)];
+    [trianglePath addLineToPoint:CGPointMake(rect.size.width - ARROW_OFFSET,0)];
     [trianglePath addLineToPoint:CGPointMake(rect.size.width, rect.size.height/2)];
-    [trianglePath addLineToPoint:CGPointMake(rect.size.width/1.1, rect.size.height)];
-    [trianglePath addLineToPoint:CGPointMake(rect.size.width/1.6, rect.size.height)];
-    [trianglePath addLineToPoint:CGPointMake(rect.size.width/1.4, rect.size.height/2)];
+    [trianglePath addLineToPoint:CGPointMake(rect.size.width - ARROW_OFFSET, rect.size.height)];
+    [trianglePath addLineToPoint:CGPointMake(rect.size.width - ARROW_WIDTH, rect.size.height)];
+    [trianglePath addLineToPoint:CGPointMake(rect.size.width - ARROW_MID_POINT, rect.size.height/2)];
     [trianglePath closePath];
     [[UIColor blackColor] setFill];
     [trianglePath fill];
     
     UIBezierPath *bodyPath = [UIBezierPath bezierPath];
     [bodyPath moveToPoint:CGPointMake(0,0)];
-    [bodyPath addLineToPoint:CGPointMake(rect.size.width / 1.6, 0)];
-    [bodyPath addLineToPoint:CGPointMake(rect.size.width/1.4, rect.size.height/2)];
-    [bodyPath addLineToPoint:CGPointMake(rect.size.width/1.6, rect.size.height)];
+    [bodyPath addLineToPoint:CGPointMake(rect.size.width - ARROW_WIDTH, 0)];
+    [bodyPath addLineToPoint:CGPointMake(rect.size.width - ARROW_MID_POINT, rect.size.height/2)];
+    [bodyPath addLineToPoint:CGPointMake(rect.size.width - ARROW_WIDTH, rect.size.height)];
     [bodyPath addLineToPoint:CGPointMake(0, rect.size.height)];
     [bodyPath closePath];
-    [[UIColor colorWithWhite:0.1 alpha:0.8] setFill];
+    [[UIColor colorWithWhite:WHITE_COLOR alpha:ALPHA_COLOR] setFill];
     [bodyPath fill];
 }
 
