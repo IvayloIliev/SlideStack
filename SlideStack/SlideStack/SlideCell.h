@@ -29,6 +29,7 @@
 -(void)setImage:(UIImage *)image;
 -(void)setTitle:(NSString *)title;
 -(void)setColor:(UIColor *)color;
+-(void)executeCellFunctionality;
 
 @end
 

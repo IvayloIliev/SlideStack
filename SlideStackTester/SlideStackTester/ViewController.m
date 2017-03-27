@@ -12,8 +12,8 @@
 
 @interface ViewController ()
 
-@property (strong, nonatomic) SlideStackController *slideStack;
-
+@property (strong, nonatomic) SlideStackController *slideStack
+;
 @end
 
 @implementation ViewController
@@ -26,21 +26,31 @@
     
     [self.slideStack setMargin:-15];
     
-    SlideCell *cell1 = [SlideCell getCell];
+    SlideCell *cell1 = [SlideCell getCell:^{
+        NSLog(@"CELL 1");
+    }];
     cell1.delegate = self.slideStack;
     [cell1 setTitle:@"CELL 1"];
     [self.slideStack addSlideCell:cell1];
     cell1.cellColor = [UIColor orangeColor];
     
-    SlideCell *cell2 = [SlideCell getCell];
+    SlideCell *cell2 = [SlideCell getCell:^{
+        NSLog(@"CELL 2");
+    }];
     cell2.delegate = self.slideStack;
     [cell2 setTitle:@"CELL 2"];
     [self.slideStack addSlideCell:cell2];
     
-    SlideCell *cell3 = [SlideCell getCell];
+    
+    SlideCell *cell3 = [SlideCell getCell:^{
+      NSLog(@"CELL 3");
+    }];
     cell3.delegate = self.slideStack;
     [cell3 setTitle:@"CELL 3"];
-    [self.slideStack addSlideCell:cell3];
+    [self.slideStack addSlideCell:cell3 atIndex:1];
+
+    [self.slideStack removeSlideCell:cell2];
+    [self.slideStack removeSlideCellAtIndex:1];
 }
 
 

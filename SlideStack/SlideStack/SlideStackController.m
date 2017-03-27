@@ -21,7 +21,7 @@
     self = [super initWithNibName:@"SlideStackController" bundle:[NSBundle bundleWithIdentifier:BUNDLE_ID_STRING]];
     if (self)
     {
-        self.cellList = [[NSMutableArray alloc]init];
+        self.cellList = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -31,7 +31,10 @@
     [super viewDidLoad];
 }
 
--(void)setMargin:(NSInteger *)margin
+
+#pragma ----------PUBLIC------------
+
+-(void) setMargin:(NSInteger *)margin
 {
     self.cellMargin = margin;
 }
@@ -43,13 +46,45 @@
     [self formatCell:newCell];
 }
 
--(void)formatCell:(SlideCell*)newCell
+-(void) addSlideCell:(SlideCell*)newCell atIndex:(NSInteger*)index;
 {
-      CGRect newFrame = CGRectMake(newCell.frame.origin.x + COLAPSE_DISTANCE,
-                                     START_TOP_MARGIN +((self.cellList.count) * CELL_HEIGHT) + ((long)self.cellMargin*(self.cellList.count))
-                                     ,newCell.frame.size.width , newCell.frame.size.height);
-    newCell.frame = newFrame;
-    newCell.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
+    [self.cellList insertObject:newCell atIndex:index];
+    [self.view addSubview:newCell];
+    [self refresh];
+}
+
+-(void) removeSlideCell:(SlideCell *)cell
+{
+    [cell removeFromSuperview];
+    [self.cellList removeObject:cell];
+    [self refresh];
+}
+
+-(void) removeSlideCellAtIndex:(NSInteger *)index
+{
+    [[self.cellList objectAtIndex:index] removeFromSuperview];
+    [self.cellList removeObjectAtIndex:index];
+    [self refresh];
+}
+
+-(void) setCellProperties:(UIColor *)cellColor withMargin:(NSInteger *)margin
+{
+    //redraw all
+}
+
+
+#pragma ----------PRIVATE------------
+
+-(void)formatCell:(SlideCell*)cell
+{
+    NSInteger naturalCellIndex = [self.cellList indexOfObject:cell] + 1;
+    CGRect newFrame = CGRectMake(COLAPSE_DISTANCE,
+                                 START_TOP_MARGIN + (naturalCellIndex * CELL_HEIGHT) + ((long)self.cellMargin*naturalCellIndex),
+                                 cell.frame.size.width,
+                                 cell.frame.size.height);
+    cell.frame = newFrame;
+    cell.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
+    NSLog(@"cell :%@ frame: %@", cell.titleLabel.text, [NSValue valueWithCGRect:newFrame]);
 }
 
 - (void)didReceiveMemoryWarning
@@ -103,7 +138,7 @@
 
 -(void) executeCellAction:(SlideCell*)cell
 {
-    NSLog(@"%@",cell);
+    cell.executeCellFunctionality;
 }
 
 -(void)collapseAllCells
@@ -133,4 +168,10 @@
                     completion:nil];
 }
 
+-(void) refresh
+{
+    for (SlideCell* cell in self.cellList) {
+        [self formatCell:cell];
+    }
+}
 @end

@@ -20,10 +20,11 @@
 
 +(SlideCell *)getCell:(void (^)(void))cellFunctionality
 {
-  //  self. = cellFunctionality;
+ 
     SlideCell* newCell = [[[NSBundle bundleWithIdentifier:BUNDLE_ID_STRING] loadNibNamed:@"SlideCell" owner:self options:nil] firstObject];
     
     newCell.cellState = CELL_STATE_COLAPSED;
+    newCell.cellFunctionality = cellFunctionality;
     
     [newCell.heightAnchor constraintEqualToConstant:100].active = true;
     [newCell.widthAnchor constraintEqualToConstant:300].active = true;
@@ -87,6 +88,11 @@
 -(void) setTitle:(NSString *)title
 {
     [self.titleLabel setText:title];
+}
+
+-(void)executeCellFunctionality
+{
+    self.cellFunctionality();
 }
 
 -(void) setImage:(UIImage *)image
