@@ -64,12 +64,45 @@
     [self refresh];
 }
 
--(void) setCellProperties:(UIColor *)cellColor withMargin:(NSInteger *)margin
+-(void) setCellProperties:(SlideCell*)cell withColor:(UIColor*) cellColor
 {
-    //redraw all
+    if(cell == nil)
+    {
+        return;
+    }
+    
+    if(cellColor)
+    {
+        [cell setColor:cellColor];
+    }
+    [self refresh];
 }
 
+-(void) setCellPropertiesAtIndex:(NSInteger *)index withColor:(UIColor *)cellColor
+{
+    SlideCell *cell = [self.cellList objectAtIndex:index];
+    
+    if(cell == nil)
+    {
+        return;
+    }
+    
+    if(cellColor)
+    {
+        [cell setColor:cellColor];
+    }
+    [self refresh];
+}
 
+-(void) setControlerProperties:(NSInteger*) margin
+{
+    if(margin)
+    {
+        self.cellMargin = margin;
+        [self refresh];
+    }
+    [self refresh];
+}
 #pragma ----------PRIVATE------------
 
 -(void)formatCell:(SlideCell*)cell
@@ -170,7 +203,9 @@
 -(void) refresh
 {
     for (SlideCell* cell in self.cellList) {
+        [cell removeFromSuperview];
         [self formatCell:cell];
+        [self.view addSubview:cell];
     }
 }
 @end

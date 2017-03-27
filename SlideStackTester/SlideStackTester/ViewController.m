@@ -38,22 +38,18 @@
     cell1.cellColor = cyan;
     
     SlideCell *cell2 = [SlideCell getCell:^{
-        NSLog(@"CELL 2");
+        
+    SlideCell *cell3 = [SlideCell getCell:^{
+            NSLog(@"CELL 3");
+    }];
+    cell3.delegate = self.slideStack;
+    [cell3 setTitle:@"CELL 3"];
+    [self.slideStack addSlideCell:cell3 atIndex:0];
+
     }];
     cell2.delegate = self.slideStack;
     [cell2 setTitle:@"CELL 2"];
     [self.slideStack addSlideCell:cell2];
-    
-    
-    SlideCell *cell3 = [SlideCell getCell:^{
-      NSLog(@"CELL 3");
-    }];
-    cell3.delegate = self.slideStack;
-    [cell3 setTitle:@"CELL 3"];
-    [self.slideStack addSlideCell:cell3 atIndex:1];
-
-    [self.slideStack removeSlideCell:cell2];
-    [self.slideStack removeSlideCellAtIndex:1];
 }
 
 

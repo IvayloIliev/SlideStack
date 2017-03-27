@@ -25,6 +25,10 @@
 
 -(void) removeSlideCellAtIndex:(NSInteger*)index;
 
--(void) setCellProperties:(UIColor*) cellColor withMargin:(NSInteger*) margin;
+-(void) setCellProperties:(SlideCell*)cell withColor:(UIColor*) cellColor;
+
+-(void) setCellPropertiesAtIndex:(NSInteger*)index withColor:(UIColor*) cellColor;
+
+-(void) setControlerProperties:(NSInteger*) margin;
 
 @end
