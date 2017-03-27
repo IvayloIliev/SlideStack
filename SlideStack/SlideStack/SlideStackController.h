@@ -13,11 +13,10 @@
 
 @interface SlideStackController : UIViewController<SlideCellDelegate>
 
-@property NSInteger *cellMargin;
+@property NSInteger cellMargin;
 
 //Use negetive values for overlap
--(void) setMargin:(NSInteger*) margin;
-
+-(void) setMargin:(NSInteger) margin;
 -(void) addSlideCell:(SlideCell*)newCell;
 
 -(void) addSlideCell:(SlideCell*)newCell atIndex:(NSInteger*)index;

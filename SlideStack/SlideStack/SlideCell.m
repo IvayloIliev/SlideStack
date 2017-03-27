@@ -20,14 +20,13 @@
 
 +(SlideCell *)getCell:(void (^)(void))cellFunctionality
 {
- 
     SlideCell* newCell = [[[NSBundle bundleWithIdentifier:BUNDLE_ID_STRING] loadNibNamed:@"SlideCell" owner:self options:nil] firstObject];
     
     newCell.cellState = CELL_STATE_COLAPSED;
     newCell.cellFunctionality = cellFunctionality;
     
-    [newCell.heightAnchor constraintEqualToConstant:100].active = true;
-    [newCell.widthAnchor constraintEqualToConstant:300].active = true;
+    [newCell.heightAnchor constraintEqualToConstant:CELL_HEIGHT].active = true;
+    [newCell.widthAnchor constraintEqualToConstant:CELL_WIDTH].active = true;
     
     newCell.backgroundColor = [UIColor clearColor];
     newCell.cellColor = [UIColor blackColor];
@@ -57,27 +56,55 @@
 
 -(void)drawRect:(CGRect)rect
 {
-    UIBezierPath *trianglePath = [UIBezierPath bezierPath];
-    
-    [trianglePath moveToPoint:CGPointMake(rect.size.width - ARROW_WIDTH, 0)];
-    [trianglePath addLineToPoint:CGPointMake(rect.size.width - ARROW_OFFSET,0)];
-    [trianglePath addLineToPoint:CGPointMake(rect.size.width, rect.size.height/2)];
-    [trianglePath addLineToPoint:CGPointMake(rect.size.width - ARROW_OFFSET, rect.size.height)];
-    [trianglePath addLineToPoint:CGPointMake(rect.size.width - ARROW_WIDTH, rect.size.height)];
-    [trianglePath addLineToPoint:CGPointMake(rect.size.width - ARROW_MID_POINT, rect.size.height/2)];
-    [trianglePath closePath];
-    [_cellColor setFill];
+    UIBezierPath *trianglePath = [self drawTrianglePath:rect];
+    CGFloat red, green, blue, alpha;
+    [self.cellColor getRed:&red green:&green blue:&blue alpha:&alpha];
+    [[UIColor colorWithRed:red green:green blue:blue alpha:0.8] setFill];
     [trianglePath fill];
     
-    UIBezierPath *bodyPath = [UIBezierPath bezierPath];
-    [bodyPath moveToPoint:CGPointMake(0,0)];
-    [bodyPath addLineToPoint:CGPointMake(rect.size.width - ARROW_WIDTH, 0)];
-    [bodyPath addLineToPoint:CGPointMake(rect.size.width - ARROW_MID_POINT, rect.size.height/2)];
-    [bodyPath addLineToPoint:CGPointMake(rect.size.width - ARROW_WIDTH, rect.size.height)];
-    [bodyPath addLineToPoint:CGPointMake(0, rect.size.height)];
-    [bodyPath closePath];
+    UIBezierPath *bodyPath = [self drawBodyPath:rect];
     [[UIColor colorWithWhite:WHITE_COLOR alpha:ALPHA_COLOR] setFill];
     [bodyPath fill];
+    
+    [self addSubview:[self getGradientView:rect]];
+}
+
+-(UIBezierPath*) drawTrianglePath:(CGRect)rect
+{
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(rect.size.width - ARROW_WIDTH, 0)];
+    [path addLineToPoint:CGPointMake(rect.size.width - ARROW_OFFSET,0)];
+    [path addLineToPoint:CGPointMake(rect.size.width, rect.size.height/2)];
+    [path addLineToPoint:CGPointMake(rect.size.width - ARROW_OFFSET, rect.size.height)];
+    [path addLineToPoint:CGPointMake(rect.size.width - ARROW_WIDTH, rect.size.height)];
+    [path addLineToPoint:CGPointMake(rect.size.width - ARROW_MID_POINT, rect.size.height/2)];
+    [path closePath];
+    return path;
+}
+
+-(UIBezierPath*) drawBodyPath:(CGRect)rect
+{
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(rect.size.width/4,0)];
+    [path addLineToPoint:CGPointMake(rect.size.width - ARROW_WIDTH, 0)];
+    [path addLineToPoint:CGPointMake(rect.size.width - ARROW_MID_POINT, rect.size.height/2)];
+    [path addLineToPoint:CGPointMake(rect.size.width - ARROW_WIDTH, rect.size.height)];
+    [path addLineToPoint:CGPointMake(rect.size.width/4, rect.size.height)];
+    [path closePath];
+    return path;
+}
+
+-(UIView*) getGradientView:(CGRect)rect
+{
+    CAGradientLayer *gradientMask = [CAGradientLayer layer];
+    CGRect gradientFrame = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width/4, rect.size.height);
+    UIView *gradientView = [[UIView alloc] initWithFrame:gradientFrame];
+    gradientMask.frame = gradientFrame;
+    gradientMask.startPoint = CGPointMake(1, 0);
+    gradientMask.endPoint = CGPointMake(0, 0);
+    gradientMask.colors = @[(id)[UIColor colorWithWhite:WHITE_COLOR alpha:ALPHA_COLOR].CGColor,(id)self.cellColor.CGColor];
+    [gradientView.layer addSublayer:gradientMask];
+    return gradientView;
 }
 
 -(void) setDescription:(NSString *)description

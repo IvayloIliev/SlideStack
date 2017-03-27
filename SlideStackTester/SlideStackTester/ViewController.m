@@ -12,8 +12,8 @@
 
 @interface ViewController ()
 
-@property (strong, nonatomic) SlideStackController *slideStack
-;
+@property (strong, nonatomic) SlideStackController *slideStack;
+
 @end
 
 @implementation ViewController
@@ -32,7 +32,10 @@
     cell1.delegate = self.slideStack;
     [cell1 setTitle:@"CELL 1"];
     [self.slideStack addSlideCell:cell1];
-    cell1.cellColor = [UIColor orangeColor];
+    
+    UIColor *cyan = [UIColor colorWithRed:0/255.0 green:204/255.0 blue:204/255.0 alpha:1];
+    
+    cell1.cellColor = cyan;
     
     SlideCell *cell2 = [SlideCell getCell:^{
         NSLog(@"CELL 2");

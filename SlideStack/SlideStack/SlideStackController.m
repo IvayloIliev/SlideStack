@@ -31,10 +31,7 @@
     [super viewDidLoad];
 }
 
-
-#pragma ----------PUBLIC------------
-
--(void) setMargin:(NSInteger *)margin
+-(void)setMargin:(NSInteger)margin
 {
     self.cellMargin = margin;
 }
@@ -119,19 +116,21 @@
         cell.pointerStartDragCoordinatesX = [drag locationInView:cell.window].x;
         cell.cellStartDragCoordinatesX = cell.frame.origin.x;
     }
-    
     float currentPointerDistance = [drag locationInView:cell.window].x - cell.pointerStartDragCoordinatesX;
-    CGRect collapsedFrame = CGRectMake(cell.cellStartDragCoordinatesX + currentPointerDistance,
-                                       cell.frame.origin.y, cell.frame.size.width , cell.frame.size.height);
-    cell.frame = collapsedFrame;
-    
+    CGFloat offSet = cell.cellStartDragCoordinatesX + currentPointerDistance;
+    if(currentPointerDistance >= CELL_DRAG_TOLARANCE)
+    {
+        offSet = cell.cellStartDragCoordinatesX + CELL_DRAG_TOLARANCE;
+
+    }
+    cell.frame = CGRectMake(offSet,cell.frame.origin.y, cell.frame.size.width , cell.frame.size.height);
     if(drag.state == UIGestureRecognizerStateEnded)
     {
         if(currentPointerDistance >= CELL_DRAG_TOLARANCE)
         {
-            [self executeCellAction:cell];
+             [self executeCellAction:cell];
         }
-            [self collapseCell:cell];
+        [self collapseCell:cell];
     }
 }
 #pragma mark END DELEGATES
@@ -161,7 +160,7 @@
                         options: UIViewAnimationCurveEaseOut
                      animations:^
      {
-         CGRect collapsedFrame = CGRectMake(COLAPSE_DISTANCE, cell.frame.origin.y, cell.frame.size.width , cell.frame.size.height);
+         CGRect collapsedFrame = CGRectMake(-COLAPSE_DISTANCE, cell.frame.origin.y, cell.frame.size.width , cell.frame.size.height);
 
          cell.frame = collapsedFrame;
      }
