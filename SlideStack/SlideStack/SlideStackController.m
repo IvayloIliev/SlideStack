@@ -76,14 +76,22 @@
 #pragma mark DELEGATES
 -(void)onTap:(SlideCell *)cell
 {
-    if(cell.cellState == CELL_STATE_COLAPSED)
-    {
-        [self expandCell:cell];
-    }
-    else if(cell.cellState == CELL_STATE_EXPANDED)
-    {
-        [self collapseCell:cell];
-    }
+    CGRect collapsedFrame = CGRectMake(BOUNCE_PULL_DISTANCE, cell.frame.origin.y, cell.frame.size.width , cell.frame.size.height);
+    
+    cell.frame = collapsedFrame;
+    
+    [UIView animateWithDuration:1
+                          delay:0.1
+         usingSpringWithDamping:0.3
+          initialSpringVelocity:0.5
+                        options: UIViewAnimationCurveEaseOut
+                     animations:^
+     {
+         CGRect collapsedFrame = CGRectMake(COLAPSE_DISTANCE, cell.frame.origin.y, cell.frame.size.width , cell.frame.size.height);
+         
+         cell.frame = collapsedFrame;
+     }
+                     completion:nil];
 }
 
 -(void)drag:(UIPanGestureRecognizer *)drag onCell:(SlideCell *)cell

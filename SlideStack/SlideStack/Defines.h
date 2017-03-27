@@ -28,4 +28,5 @@
 #define ALPHA_COLOR 0.8
 #define WHITE_COLOR 0.3
 
+#define BOUNCE_PULL_DISTANCE -90
 #endif /* Defines_h */
