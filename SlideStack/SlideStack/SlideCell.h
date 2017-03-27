@@ -20,14 +20,15 @@
 @property (nonatomic, weak) id <SlideCellDelegate> delegate;
 @property float pointerStartDragCoordinatesX;
 @property float cellStartDragCoordinatesX;
-
 @property NSInteger cellState;
+@property UIColor *cellColor;
 
 +(SlideCell*) getCell;
 
 -(void)setDescription:(NSString *)description;
 -(void)setImage:(UIImage *)image;
 -(void)setTitle:(NSString *)title;
+-(void)setColor:(UIColor *)color;
 
 @end
 

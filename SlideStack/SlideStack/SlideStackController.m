@@ -34,6 +34,7 @@
     cell1.delegate = self;
     [cell1 setTitle:@"CELL 1"];
     [self addSlideCell:cell1];
+    cell1.cellColor = [UIColor orangeColor];
 
     SlideCell *cell2 = [SlideCell getCell];
     cell2.delegate = self;

@@ -26,6 +26,6 @@
 #define ARROW_MID_POINT 85
 #define ARROW_OFFSET 20
 #define ALPHA_COLOR 0.8
-#define WHITE_COLOR 0.1
+#define WHITE_COLOR 0.3
 
 #endif /* Defines_h */

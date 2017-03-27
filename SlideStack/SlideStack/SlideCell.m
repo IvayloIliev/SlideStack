@@ -27,6 +27,7 @@
     [newCell.widthAnchor constraintEqualToConstant:300].active = true;
     
     newCell.backgroundColor = [UIColor clearColor];
+    newCell.cellColor = [UIColor blackColor];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:newCell
@@ -62,7 +63,7 @@
     [trianglePath addLineToPoint:CGPointMake(rect.size.width - ARROW_WIDTH, rect.size.height)];
     [trianglePath addLineToPoint:CGPointMake(rect.size.width - ARROW_MID_POINT, rect.size.height/2)];
     [trianglePath closePath];
-    [[UIColor blackColor] setFill];
+    [_cellColor setFill];
     [trianglePath fill];
     
     UIBezierPath *bodyPath = [UIBezierPath bezierPath];
@@ -89,5 +90,10 @@
 -(void) setImage:(UIImage *)image
 {
     [self.imageView setImage:image];
+}
+
+-(void)setColor:(UIColor *)color
+{
+    _cellColor = color;
 }
 @end
