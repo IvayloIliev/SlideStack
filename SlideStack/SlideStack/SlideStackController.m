@@ -108,7 +108,7 @@
 -(void)formatCell:(SlideCell*)cell
 {
     NSInteger naturalCellIndex = [self.cellList indexOfObject:cell] + 1;
-    CGRect newFrame = CGRectMake(COLAPSE_DISTANCE,
+    CGRect newFrame = CGRectMake(-1 * COLAPSE_DISTANCE,
                                  START_TOP_MARGIN + (naturalCellIndex * CELL_HEIGHT) + ((long)self.cellMargin*naturalCellIndex),
                                  cell.frame.size.width,
                                  cell.frame.size.height);
