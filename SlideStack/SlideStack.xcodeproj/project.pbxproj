@@ -15,7 +15,7 @@
 		B526AF311E83BF88009C78CB /* SlideStackController.h in Headers */ = {isa = PBXBuildFile; fileRef = B526AF2E1E83BF88009C78CB /* SlideStackController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B526AF321E83BF88009C78CB /* SlideStackController.m in Sources */ = {isa = PBXBuildFile; fileRef = B526AF2F1E83BF88009C78CB /* SlideStackController.m */; };
 		B526AF331E83BF88009C78CB /* SlideStackController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B526AF301E83BF88009C78CB /* SlideStackController.xib */; };
-		B526AF431E83D2B3009C78CB /* SlideCell.h in Headers */ = {isa = PBXBuildFile; fileRef = B526AF411E83D2B3009C78CB /* SlideCell.h */; };
+		B526AF431E83D2B3009C78CB /* SlideCell.h in Headers */ = {isa = PBXBuildFile; fileRef = B526AF411E83D2B3009C78CB /* SlideCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B526AF441E83D2B3009C78CB /* SlideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B526AF421E83D2B3009C78CB /* SlideCell.m */; };
 		B526AF461E83D2C4009C78CB /* SlideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B526AF451E83D2C4009C78CB /* SlideCell.xib */; };
 /* End PBXBuildFile section */
@@ -123,8 +123,8 @@
 				B526AF2D1E83BF82009C78CB /* PublicHeader.h in Headers */,
 				4B48023E1E82B75D00272C15 /* SlideStack.h in Headers */,
 				B526AF311E83BF88009C78CB /* SlideStackController.h in Headers */,
-				1DBB7A8D1E854DA200D99FBB /* PublicProtocols.h in Headers */,
 				B526AF431E83D2B3009C78CB /* SlideCell.h in Headers */,
+				1DBB7A8D1E854DA200D99FBB /* PublicProtocols.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

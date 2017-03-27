@@ -23,7 +23,7 @@
 @property NSInteger cellState;
 @property UIColor *cellColor;
 
-+(SlideCell*) getCell;
++(SlideCell*) getCell:(void (^)(void))cellFunctionality;
 
 -(void)setDescription:(NSString *)description;
 -(void)setImage:(UIImage *)image;

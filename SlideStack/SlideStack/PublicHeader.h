@@ -10,5 +10,6 @@
 #define PublicHeader_h
 
 #import "SlideStackController.h"
+#import "SlideCell.h"
 
 #endif /* PublicHeader_h */

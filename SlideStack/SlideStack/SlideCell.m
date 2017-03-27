@@ -11,16 +11,18 @@
 
 @interface SlideCell ()
 
-// @property (nonatomic, copy, nullability) returnType (^blockName)(parameterTypes);
+ @property void (^cellFunctionality)(void);
 
 
 @end
 
 @implementation SlideCell
 
-+(SlideCell *)getCell
++(SlideCell *)getCell:(void (^)(void))cellFunctionality
 {
+  //  self. = cellFunctionality;
     SlideCell* newCell = [[[NSBundle bundleWithIdentifier:BUNDLE_ID_STRING] loadNibNamed:@"SlideCell" owner:self options:nil] firstObject];
+    
     newCell.cellState = CELL_STATE_COLAPSED;
     
     [newCell.heightAnchor constraintEqualToConstant:100].active = true;

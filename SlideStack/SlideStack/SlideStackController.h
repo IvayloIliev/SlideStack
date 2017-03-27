@@ -17,5 +17,6 @@
 
 //Use negetive values for overlap
 -(void) setMargin:(NSInteger*) margin;
+-(void) addSlideCell:(SlideCell*)newCell;
 
 @end

@@ -26,25 +26,9 @@
     return self;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    [self setMargin:15];
-    
-    SlideCell *cell1 = [SlideCell getCell];
-    cell1.delegate = self;
-    [cell1 setTitle:@"CELL 1"];
-    [self addSlideCell:cell1];
-    cell1.cellColor = [UIColor orangeColor];
-
-    SlideCell *cell2 = [SlideCell getCell];
-    cell2.delegate = self;
-    [cell2 setTitle:@"CELL 2"];
-    [self addSlideCell:cell2];
-    
-    SlideCell *cell3 = [SlideCell getCell];
-    cell3.delegate = self;
-    [cell3 setTitle:@"CELL 3"];
-    [self addSlideCell:cell3];
 }
 
 -(void)setMargin:(NSInteger *)margin
@@ -62,7 +46,7 @@
 -(void)formatCell:(SlideCell*)newCell
 {
       CGRect newFrame = CGRectMake(newCell.frame.origin.x + COLAPSE_DISTANCE,
-                                     START_TOP_MARGIN +((self.cellList.count) * CELL_HEIGHT) - ((long)self.cellMargin*(self.cellList.count))
+                                     START_TOP_MARGIN +((self.cellList.count) * CELL_HEIGHT) + ((long)self.cellMargin*(self.cellList.count))
                                      ,newCell.frame.size.width , newCell.frame.size.height);
     newCell.frame = newFrame;
     newCell.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
@@ -78,20 +62,19 @@
 {
     CGRect collapsedFrame = CGRectMake(BOUNCE_PULL_DISTANCE, cell.frame.origin.y, cell.frame.size.width , cell.frame.size.height);
     
-    cell.frame = collapsedFrame;
-    
-    [UIView animateWithDuration:1
-                          delay:0.1
-         usingSpringWithDamping:0.3
+    [UIView animateWithDuration:0.3
+                          delay:0
+         usingSpringWithDamping:1
           initialSpringVelocity:0.5
                         options: UIViewAnimationCurveEaseOut
                      animations:^
      {
-         CGRect collapsedFrame = CGRectMake(COLAPSE_DISTANCE, cell.frame.origin.y, cell.frame.size.width , cell.frame.size.height);
-         
          cell.frame = collapsedFrame;
      }
-                     completion:nil];
+                     completion:^(BOOL finished) {
+                         [self collapseCell:cell];
+                     }];
+    
 }
 
 -(void)drag:(UIPanGestureRecognizer *)drag onCell:(SlideCell *)cell
@@ -111,16 +94,17 @@
     {
         if(currentPointerDistance >= CELL_DRAG_TOLARANCE)
         {
-            [self expandCell:cell];
+            [self executeCellAction:cell];
         }
-        else
-        {
             [self collapseCell:cell];
-        }
     }
 }
 #pragma mark END DELEGATES
 
+-(void) executeCellAction:(SlideCell*)cell
+{
+    NSLog(@"%@",cell);
+}
 
 -(void)collapseAllCells
 {
@@ -135,8 +119,10 @@
 -(void)collapseCell:(SlideCell*)cell
 {
     cell.cellState = CELL_STATE_COLAPSED;
-    [UIView animateWithDuration:0.5
-                          delay:0.1
+    [UIView animateWithDuration:0.3
+                          delay:0
+         usingSpringWithDamping:1
+          initialSpringVelocity:0.5
                         options: UIViewAnimationCurveEaseOut
                      animations:^
      {
@@ -145,22 +131,6 @@
          cell.frame = collapsedFrame;
      }
                     completion:nil];
-}
-
--(void)expandCell:(SlideCell*)cell
-{
-    [self collapseAllCells];
-    cell.cellState = CELL_STATE_EXPANDED;
-    [UIView animateWithDuration:0.5
-                          delay:0.1
-                        options: UIViewAnimationCurveEaseOut
-                     animations:^
-     {
-         CGRect collapsedFrame = CGRectMake(0 , cell.frame.origin.y, cell.frame.size.width , cell.frame.size.height);
-         
-         cell.frame = collapsedFrame;
-     }
-                     completion:nil];
 }
 
 @end
