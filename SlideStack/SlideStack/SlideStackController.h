@@ -29,6 +29,6 @@
 
 -(void) setCellPropertiesAtIndex:(NSInteger)index withColor:(UIColor*) cellColor;
 
--(void) setControlerProperties:(NSInteger) margin;
+-(void) setControllerProperties:(NSInteger) margin;
 
 @end

@@ -14,8 +14,7 @@
 @property NSMutableArray *cellList;
 -(void) moveCellUp:(SlideCell*)cell;
 -(void) moveCellDown:(SlideCell*)cell;
--(void) moveNeighbouringCells:(NSInteger)index;
--(void) restoreNeighbouringCells:(NSInteger) index;
+-(void) moveNeighbouringCells:(SlideCell*)cell;
 @end
 
 @implementation SlideStackController
@@ -26,6 +25,7 @@
     if (self)
     {
         self.cellList = [[NSMutableArray alloc] init];
+        self.view.autoresizingMask = UIViewAutoresizingNone;
     }
     return self;
 }
@@ -72,12 +72,7 @@
 
 -(void) setCellProperties:(SlideCell*)cell withColor:(UIColor*) cellColor
 {
-    if(cell == nil)
-    {
-        return;
-    }
-    
-    if(cellColor)
+    if(cellColor && cell)
     {
         [cell setColor:cellColor];
     }
@@ -87,25 +82,18 @@
 -(void) setCellPropertiesAtIndex:(NSInteger)index withColor:(UIColor *)cellColor
 {
     SlideCell *cell = [self.cellList objectAtIndex:index];
-    
-    if(cell == nil)
-    {
-        return;
-    }
-    
-    if(cellColor)
+    if(cellColor && cell)
     {
         [cell setColor:cellColor];
     }
     //[self refresh];
 }
 
--(void) setControlerProperties:(NSInteger) margin
+-(void) setControllerProperties:(NSInteger) margin
 {
     if(margin)
     {
         self.cellMargin = margin;
-       // [self refresh];
     }
     //[self refresh];
 }
@@ -113,11 +101,8 @@
 
 -(void)formatCell:(SlideCell*)cell
 {
-    NSInteger naturalCellIndex = [self.cellList indexOfObject:cell] + 1;
-    CGRect newFrame = CGRectMake(-1 * COLAPSE_DISTANCE,
-                                 START_TOP_MARGIN + (naturalCellIndex * CELL_HEIGHT) + ((long)self.cellMargin*naturalCellIndex),
-                                 CELL_WIDTH,
-                                 CELL_HEIGHT);
+    NSInteger cellIndex = [self.cellList indexOfObject:cell];
+    CGRect newFrame = CGRectMake(-1 * COLAPSE_DISTANCE,(cellIndex * CELL_HEIGHT) + ((long)self.cellMargin*cellIndex),CELL_WIDTH,CELL_HEIGHT);
     [UIView animateWithDuration:0.15
                           delay:0.0
                         options:UIViewAnimationOptionCurveLinear
@@ -175,8 +160,9 @@
     cell.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
 }
 
--(void) moveNeighbouringCells:(NSInteger) index
+-(void) moveNeighbouringCells:(SlideCell*) cell
 {
+    NSInteger index = [[self cellList] indexOfObject:cell];
     if(index > 0)
     {
         [self moveCellUp:[[self cellList] objectAtIndex:index-1]];
@@ -184,20 +170,6 @@
     if(index < [self.cellList count] - 1)
     {
         [self moveCellDown:[[self cellList] objectAtIndex:index+1]];
-    }
-}
-
--(void) restoreNeighbouringCells:(NSInteger) index
-{
-    if(index > 0)
-    {
-        SlideCell* previous = [[self cellList] objectAtIndex:index-1];
-        [self formatCell:previous];
-    }
-    if(index < [self.cellList count] - 1)
-    {
-        SlideCell* next = [[self cellList] objectAtIndex:index+1];
-        [self formatCell:next];
     }
 }
 
@@ -223,29 +195,25 @@
                      completion:nil];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-
 #pragma mark DELEGATES
+
 -(void)onTap:(SlideCell *)cell
 {
-    CGRect collapsedFrame = CGRectMake(BOUNCE_PULL_DISTANCE, cell.frame.origin.y, cell.frame.size.width , cell.frame.size.height);
+    CGRect bounceFrame = CGRectMake(BOUNCE_PULL_DISTANCE, cell.frame.origin.y, cell.frame.size.width , cell.frame.size.height);
     
     [UIView animateWithDuration:0.3
                           delay:0
          usingSpringWithDamping:1
           initialSpringVelocity:0.5
-                        options: UIViewAnimationCurveEaseOut
+                        options: UIViewAnimationOptionCurveEaseOut
                      animations:^
      {
-         cell.frame = collapsedFrame;
+         cell.frame = bounceFrame;
+         [self moveNeighbouringCells:cell];
      }
                      completion:^(BOOL finished) {
-                         [self collapseCell:cell];
+                         [self refresh];
                      }];
-    
 }
 
 -(void)drag:(UIPanGestureRecognizer *)drag onCell:(SlideCell *)cell
@@ -254,7 +222,7 @@
     {
         cell.pointerStartDragCoordinatesX = [drag locationInView:cell.window].x;
         cell.cellStartDragCoordinatesX = cell.frame.origin.x;
-        [self moveNeighbouringCells:[[self cellList] indexOfObject:cell]];
+        [self moveNeighbouringCells:cell];
     }
     float currentPointerDistance = [drag locationInView:cell.window].x - cell.pointerStartDragCoordinatesX;
     CGFloat offSet = cell.cellStartDragCoordinatesX + currentPointerDistance;
@@ -270,7 +238,7 @@
         {
              [self executeCellAction:cell];
         }
-        [self collapseCell:cell];
+        [self refresh];
     }
 }
 
@@ -324,5 +292,6 @@
         [self formatCell:cell];
         [self.view addSubview:cell];
     }
+    self.view.frame = CGRectMake(0,START_TOP_MARGIN, CELL_WIDTH - COLAPSE_DISTANCE, [[self cellList] count] * CELL_HEIGHT + [[self cellList] count]*_cellMargin);
 }
 @end
