@@ -43,7 +43,7 @@
     [self formatCell:newCell];
 }
 
--(void) addSlideCell:(SlideCell*)newCell atIndex:(NSInteger*)index;
+-(void) addSlideCell:(SlideCell*)newCell atIndex:(NSInteger)index;
 {
     [self.cellList insertObject:newCell atIndex:index];
     [self.view addSubview:newCell];
@@ -57,7 +57,7 @@
     [self refresh];
 }
 
--(void) removeSlideCellAtIndex:(NSInteger *)index
+-(void) removeSlideCellAtIndex:(NSInteger)index
 {
     [[self.cellList objectAtIndex:index] removeFromSuperview];
     [self.cellList removeObjectAtIndex:index];
@@ -78,7 +78,7 @@
     [self refresh];
 }
 
--(void) setCellPropertiesAtIndex:(NSInteger *)index withColor:(UIColor *)cellColor
+-(void) setCellPropertiesAtIndex:(NSInteger)index withColor:(UIColor *)cellColor
 {
     SlideCell *cell = [self.cellList objectAtIndex:index];
     
@@ -94,7 +94,7 @@
     [self refresh];
 }
 
--(void) setControlerProperties:(NSInteger*) margin
+-(void) setControlerProperties:(NSInteger) margin
 {
     if(margin)
     {
@@ -170,7 +170,7 @@
 
 -(void) executeCellAction:(SlideCell*)cell
 {
-    cell.executeCellFunctionality;
+    [cell executeCellFunctionality];
 }
 
 -(void)collapseAllCells
