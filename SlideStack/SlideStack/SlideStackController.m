@@ -126,7 +126,7 @@
                           delay:0
          usingSpringWithDamping:1
           initialSpringVelocity:0.5
-                        options: UIViewAnimationCurveEaseOut
+                        options: UIViewAnimationOptionCurveEaseOut
                      animations:^
      {
                      cell.frame = newFrame;
@@ -150,7 +150,7 @@
                           delay:0
          usingSpringWithDamping:1
           initialSpringVelocity:0.5
-                        options: UIViewAnimationCurveEaseOut
+                        options: UIViewAnimationOptionCurveEaseOut
                      animations:^
      {
          cell.frame = newFrame;
@@ -256,7 +256,7 @@
                           delay:0
          usingSpringWithDamping:1
           initialSpringVelocity:0.5
-                        options: UIViewAnimationCurveEaseOut
+                        options: UIViewAnimationOptionCurveEaseOut
                      animations:^
      {
          CGRect collapsedFrame = CGRectMake(-COLAPSE_DISTANCE, cell.frame.origin.y, cell.frame.size.width , cell.frame.size.height);
@@ -264,14 +264,13 @@
          cell.frame = collapsedFrame;
      }
                     completion:nil];
-    [self restoreNeighbouringCells:[[self cellList] indexOfObject:cell]];
 }
 
 -(void) rearangeCells:(SlideCell*) cell
 {
-    int index = [self.cellList indexOfObject:cell];
+    NSInteger index = [self.cellList indexOfObject:cell];
     
-    for (int i = index + 1; i < self.cellList.count; i++) {
+    for (NSInteger i = index + 1; i < self.cellList.count; i++) {
         [self pullCellUp: [self.cellList objectAtIndex:i]];
     }
     
