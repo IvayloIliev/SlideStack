@@ -46,7 +46,7 @@
         [cell3 setImage:minusImage];
         [cell3 setTitle:@"CELL 3"];
         
-        [self.slideStack addSlideCell:cell3 atIndex:0];
+        [self.slideStack addSlideCell:cell3 atIndex:1];
     }];
     
     cell2.delegate = self.slideStack;

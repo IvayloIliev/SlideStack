@@ -42,30 +42,32 @@
 
 -(void) addSlideCell:(SlideCell*)newCell
 {
-    [self.cellList addObject:newCell];
+    [self.cellList insertObject:newCell atIndex:0];
+    [self rearangeCells:newCell];
     [self.view addSubview:newCell];
-    [self formatCell:newCell];
+    [self collapseCell:newCell];
 }
 
 -(void) addSlideCell:(SlideCell*)newCell atIndex:(NSInteger)index;
 {
     [self.cellList insertObject:newCell atIndex:index];
+    [self rearangeCells:newCell];
     [self.view addSubview:newCell];
-    [self refresh];
+    [self collapseCell:newCell];
 }
 
 -(void) removeSlideCell:(SlideCell *)cell
 {
     [cell removeFromSuperview];
     [self.cellList removeObject:cell];
-    [self refresh];
+   // [self refresh];
 }
 
 -(void) removeSlideCellAtIndex:(NSInteger)index
 {
     [[self.cellList objectAtIndex:index] removeFromSuperview];
     [self.cellList removeObjectAtIndex:index];
-    [self refresh];
+    //[self refresh];
 }
 
 -(void) setCellProperties:(SlideCell*)cell withColor:(UIColor*) cellColor
@@ -79,7 +81,7 @@
     {
         [cell setColor:cellColor];
     }
-    [self refresh];
+   // [self refresh];
 }
 
 -(void) setCellPropertiesAtIndex:(NSInteger)index withColor:(UIColor *)cellColor
@@ -95,7 +97,7 @@
     {
         [cell setColor:cellColor];
     }
-    [self refresh];
+    //[self refresh];
 }
 
 -(void) setControlerProperties:(NSInteger) margin
@@ -103,9 +105,9 @@
     if(margin)
     {
         self.cellMargin = margin;
-        [self refresh];
+       // [self refresh];
     }
-    [self refresh];
+    //[self refresh];
 }
 #pragma mark PRIVATE
 
@@ -123,6 +125,53 @@
                          cell.frame = newFrame;
                      }
                      completion:nil];
+    cell.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
+}
+
+-(void) pullCellUp:(SlideCell*) cell
+{
+    NSInteger naturalCellIndex = [self.cellList indexOfObject:cell] + 1;
+    CGRect newFrame = CGRectMake(-1 * COLAPSE_DISTANCE,
+                                 self.view.frame.size.height -(START_TOP_MARGIN + (naturalCellIndex * CELL_HEIGHT) + ((long)self.cellMargin*naturalCellIndex)),
+                                 cell.frame.size.width,
+                                 cell.frame.size.height);
+    
+    cell.cellState = CELL_STATE_COLAPSED;
+    [UIView animateWithDuration:0.5
+                          delay:0
+         usingSpringWithDamping:1
+          initialSpringVelocity:0.5
+                        options: UIViewAnimationCurveEaseOut
+                     animations:^
+     {
+                     cell.frame = newFrame;
+     }
+                     completion:nil];
+    
+    cell.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
+}
+
+-(void) pullCellDown:(SlideCell*) cell
+{
+    NSInteger naturalCellIndex = [self.cellList indexOfObject:cell];
+    
+    CGRect newFrame = CGRectMake(-1 * COLAPSE_DISTANCE,
+                                 self.view.frame.size.height -(START_TOP_MARGIN + (naturalCellIndex * CELL_HEIGHT) + ((long)self.cellMargin*naturalCellIndex)),
+                                 cell.frame.size.width,
+                                 cell.frame.size.height);
+    
+    cell.cellState = CELL_STATE_COLAPSED;
+    [UIView animateWithDuration:0.5
+                          delay:0
+         usingSpringWithDamping:1
+          initialSpringVelocity:0.5
+                        options: UIViewAnimationCurveEaseOut
+                     animations:^
+     {
+         cell.frame = newFrame;
+     }
+                     completion:nil];
+    
     cell.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
 }
 
@@ -232,20 +281,10 @@
     [cell executeCellFunctionality];
 }
 
--(void)collapseAllCells
-{
-    for (SlideCell *cell in self.cellList) {
-        if(cell.cellState == CELL_STATE_EXPANDED)
-        {
-            [self collapseCell:cell];
-        }
-    }
-}
-
 -(void)collapseCell:(SlideCell*)cell
 {
     cell.cellState = CELL_STATE_COLAPSED;
-    [UIView animateWithDuration:0.3
+    [UIView animateWithDuration:0.5
                           delay:0
          usingSpringWithDamping:1
           initialSpringVelocity:0.5
@@ -258,6 +297,24 @@
      }
                     completion:nil];
     [self restoreNeighbouringCells:[[self cellList] indexOfObject:cell]];
+}
+
+-(void) rearangeCells:(SlideCell*) cell
+{
+    int index = [self.cellList indexOfObject:cell];
+    
+    for (int i = index + 1; i < self.cellList.count; i++) {
+        [self pullCellUp: [self.cellList objectAtIndex:i]];
+    }
+    
+    NSInteger naturalCellIndex = index + 1;
+    CGRect newFrame = CGRectMake(-300,
+                                 self.view.frame.size.height -(START_TOP_MARGIN + (naturalCellIndex * CELL_HEIGHT) + ((long)self.cellMargin*naturalCellIndex)),
+                                 cell.frame.size.width,
+                                 cell.frame.size.height);
+    cell.frame = newFrame;
+    
+    cell.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
 }
 
 -(void) refresh
