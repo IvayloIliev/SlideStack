@@ -132,4 +132,9 @@
 {
     _cellColor = color;
 }
+
+-(void)setBlock:(void (^)(void))cellFunctionality
+{
+    self.cellFunctionality = cellFunctionality;
+}
 @end

@@ -24,7 +24,7 @@
 @property UIColor *cellColor;
 
 +(SlideCell*) getCell:(void (^)(void))cellFunctionality;
-
+-(void)setBlock:(void (^)(void))cellFunctionality;
 -(void)setDescription:(NSString *)description;
 -(void)setImage:(UIImage *)image;
 -(void)setTitle:(NSString *)title;
