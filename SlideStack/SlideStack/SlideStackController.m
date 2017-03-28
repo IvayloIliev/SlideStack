@@ -12,9 +12,7 @@
 
 @interface SlideStackController ()
 @property NSMutableArray *cellList;
--(void) moveCellUp:(SlideCell*)cell;
--(void) moveCellDown:(SlideCell*)cell;
--(void) moveNeighbouringCells:(SlideCell*)cell;
+
 @end
 
 @implementation SlideStackController
@@ -67,7 +65,7 @@
 {
     [[self.cellList objectAtIndex:index] removeFromSuperview];
     [self.cellList removeObjectAtIndex:index];
-    //[self refresh];
+
 }
 
 -(void) setCellProperties:(SlideCell*)cell withColor:(UIColor*) cellColor
@@ -98,20 +96,6 @@
     //[self refresh];
 }
 #pragma mark PRIVATE
-
--(void)formatCell:(SlideCell*)cell
-{
-    NSInteger cellIndex = [self.cellList indexOfObject:cell];
-    CGRect newFrame = CGRectMake(-1 * COLAPSE_DISTANCE,(cellIndex * CELL_HEIGHT) + ((long)self.cellMargin*cellIndex),CELL_WIDTH,CELL_HEIGHT);
-    [UIView animateWithDuration:0.15
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveLinear
-                     animations:^{
-                         cell.frame = newFrame;
-                     }
-                     completion:nil];
-    cell.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-}
 
 -(void) pullCellUp:(SlideCell*) cell
 {
@@ -150,7 +134,7 @@
                           delay:0
          usingSpringWithDamping:1
           initialSpringVelocity:0.5
-                        options: UIViewAnimationOptionCurveEaseOut
+                        options: UIViewAnimationCurveEaseOut
                      animations:^
      {
          cell.frame = newFrame;
@@ -160,39 +144,9 @@
     cell.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
 }
 
--(void) moveNeighbouringCells:(SlideCell*) cell
+- (void)didReceiveMemoryWarning
 {
-    NSInteger index = [[self cellList] indexOfObject:cell];
-    if(index > 0)
-    {
-        [self moveCellUp:[[self cellList] objectAtIndex:index-1]];
-    }
-    if(index < [self.cellList count] - 1)
-    {
-        [self moveCellDown:[[self cellList] objectAtIndex:index+1]];
-    }
-}
-
--(void) moveCellUp:(SlideCell*)cell
-{
-    [UIView animateWithDuration:0.15
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveLinear
-                     animations:^{
-                         cell.frame = CGRectMake(cell.frame.origin.x,cell.frame.origin.y - CELL_MOVING_DISTANCE_UP, cell.frame.size.width , cell.frame.size.height - CELL_MOVING_DISTANCE_UP);
-                     }
-                     completion:nil];
-}
-
--(void) moveCellDown:(SlideCell*)cell
-{
-    [UIView animateWithDuration:0.15
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveLinear
-                     animations:^{
-                         cell.frame = CGRectMake(cell.frame.origin.x,cell.frame.origin.y + CELL_MOVING_DISTANCE_DOWN, cell.frame.size.width , cell.frame.size.height - CELL_MOVING_DISTANCE_DOWN);
-                     }
-                     completion:nil];
+    [super didReceiveMemoryWarning];
 }
 
 #pragma mark DELEGATES
@@ -212,7 +166,7 @@
          [self moveNeighbouringCells:cell];
      }
                      completion:^(BOOL finished) {
-                         [self refresh];
+                         [self collapseCell:cell];
                      }];
 }
 
@@ -222,7 +176,6 @@
     {
         cell.pointerStartDragCoordinatesX = [drag locationInView:cell.window].x;
         cell.cellStartDragCoordinatesX = cell.frame.origin.x;
-        [self moveNeighbouringCells:cell];
     }
     float currentPointerDistance = [drag locationInView:cell.window].x - cell.pointerStartDragCoordinatesX;
     CGFloat offSet = cell.cellStartDragCoordinatesX + currentPointerDistance;
@@ -238,7 +191,7 @@
         {
              [self executeCellAction:cell];
         }
-        [self refresh];
+        [self collapseCell:cell];
     }
 }
 
@@ -284,13 +237,4 @@
     cell.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
 }
 
--(void) refresh
-{
-    for (SlideCell* cell in self.cellList) {
-        [cell removeFromSuperview];
-        [self formatCell:cell];
-        [self.view addSubview:cell];
-    }
-    self.view.frame = CGRectMake(0,START_TOP_MARGIN, CELL_WIDTH - COLAPSE_DISTANCE, [[self cellList] count] * CELL_HEIGHT + [[self cellList] count]*_cellMargin);
-}
 @end
