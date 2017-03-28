@@ -28,34 +28,30 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-
-#pragma mark PUBLIC
-
 -(void)setMargin:(NSInteger)margin
 {
     self.cellMargin = margin;
 }
 
+-(void)resizeView
+{
+    CGFloat screenHeight = [[UIScreen mainScreen] bounds].size.height;
+    NSInteger listElements = [[self cellList] count];
+    CGFloat y = screenHeight - VIEW_BOTTOM_MARGIN - listElements*CELL_HEIGHT - listElements * self.cellMargin;
+    CGRect newFrame = CGRectMake(0,y,CELL_WIDTH - COLAPSE_DISTANCE,CELL_HEIGHT * listElements);
+    self.view.frame = newFrame;
+}
+
 -(void) addSlideCell:(SlideCell*)newCell
 {
-    [self.cellList insertObject:newCell atIndex:0];
-    [self rearangeCells:newCell];
-    [self.view addSubview:newCell];
-    [self collapseCell:newCell];
+    [self addSlideCell:newCell atIndex:0];
 }
 
 -(void) addSlideCell:(SlideCell*)newCell atIndex:(NSInteger)index;
 {
     [self.cellList insertObject:newCell atIndex:index];
+    [self resizeView];
+    [self setCellFrame:newCell];
     [self rearangeCells:newCell];
     [self.view addSubview:newCell];
     [self collapseCell:newCell];
@@ -135,7 +131,7 @@
 
 -(void) pullCellDown:(SlideCell*) cell
 {
-    NSInteger cellIndex = [self.cellList indexOfObject:cell] - 1;
+    NSInteger cellIndex = [self.cellList indexOfObject:cell];
     
     CGRect newFrame = CGRectMake(-1 * COLAPSE_DISTANCE,
                                  self.view.frame.size.height -(START_TOP_MARGIN + (cellIndex * CELL_HEIGHT) + ((long)self.cellMargin*cellIndex)),
@@ -147,7 +143,7 @@
                           delay:0
          usingSpringWithDamping:1
           initialSpringVelocity:0.5
-                        options: UIViewAnimationCurveEaseOut
+                        options: UIViewAnimationOptionCurveEaseOut
                      animations:^
      {
          cell.frame = newFrame;
@@ -257,21 +253,25 @@
                     completion:completion];
 }
 
+-(void) setCellFrame:(SlideCell*) cell
+{
+    NSInteger cellIndex = [self.cellList indexOfObject:cell];
+    NSInteger previousElementsCount = ([[self cellList] count] - cellIndex);
+    NSInteger ycoord = self.view.frame.size.height - previousElementsCount * CELL_HEIGHT + self.cellMargin*previousElementsCount;
+    CGRect newFrame = CGRectMake(-COLAPSE_DISTANCE,
+                                 ycoord,
+                                 CELL_WIDTH,
+                                 CELL_HEIGHT);
+    cell.frame = newFrame;
+}
+
 -(void) rearangeCells:(SlideCell*) cell
 {
-    NSInteger index = [self.cellList indexOfObject:cell];
-    
-    for (NSInteger i = index + 1; i < self.cellList.count; i++) {
-        [self pullCellUp: [self.cellList objectAtIndex:i]];
+    NSInteger cellIndex = [self.cellList indexOfObject:cell];
+    for (NSInteger i = cellIndex + 1; i < self.cellList.count; i++) {
+        //[self pullCellUp: [self.cellList objectAtIndex:i]];
+        [self setCellFrame:[self.cellList objectAtIndex:i]];
     }
-    
-    NSInteger cellIndex = index;
-    CGRect newFrame = CGRectMake(-300,
-                                 self.view.frame.size.height -(START_TOP_MARGIN + (cellIndex * CELL_HEIGHT) + ((long)self.cellMargin*cellIndex)),
-                                 cell.frame.size.width,
-                                 cell.frame.size.height);
-    cell.frame = newFrame;
-    cell.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
 }
 
 @end

@@ -32,4 +32,6 @@
 #define CELL_MOVING_DISTANCE_DOWN 20
 
 #define BOUNCE_PULL_DISTANCE -230
+
+#define VIEW_BOTTOM_MARGIN 100
 #endif /* Defines_h */

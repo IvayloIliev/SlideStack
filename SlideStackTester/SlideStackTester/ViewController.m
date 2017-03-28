@@ -30,7 +30,7 @@
     self.slideStack = [[SlideStackController alloc] init];
     [self.view addSubview:self.slideStack.view];
     
-    [self.slideStack setMargin:-15];
+    [self.slideStack setMargin:0];
     
     cell2 = [SlideCell getCell:^{
         SlideCell *cell3 = [SlideCell getCell:nil];
