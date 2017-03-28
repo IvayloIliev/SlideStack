@@ -30,6 +30,8 @@
         NSLog(@"CELL 1");
     }];
     cell1.delegate = self.slideStack;
+    UIImage *plusImage = [UIImage imageNamed:@"plus" inBundle:[NSBundle bundleWithIdentifier:@"net.nemetschek.SlideStack"] compatibleWithTraitCollection:nil];
+    UIImage *minusImage = [UIImage imageNamed:@"minus" inBundle:[NSBundle bundleWithIdentifier:@"net.nemetschek.SlideStack"] compatibleWithTraitCollection:nil];
     [cell1 setTitle:@"CELL 1"];
     [self.slideStack addSlideCell:cell1];
     
@@ -39,15 +41,16 @@
     
     SlideCell *cell2 = [SlideCell getCell:^{
         
-    SlideCell *cell3 = [SlideCell getCell:^{
-            NSLog(@"CELL 3");
+        SlideCell *cell3 = [SlideCell getCell:nil];
+        cell3.delegate = self.slideStack;
+        [cell3 setImage:minusImage];
+        [cell3 setTitle:@"CELL 3"];
+        
+        [self.slideStack addSlideCell:cell3 atIndex:0];
     }];
-    cell3.delegate = self.slideStack;
-    [cell3 setTitle:@"CELL 3"];
-    [self.slideStack addSlideCell:cell3 atIndex:0];
-
-    }];
+    
     cell2.delegate = self.slideStack;
+    [cell2 setImage:plusImage];
     [cell2 setTitle:@"CELL 2"];
     [self.slideStack addSlideCell:cell2];
 }

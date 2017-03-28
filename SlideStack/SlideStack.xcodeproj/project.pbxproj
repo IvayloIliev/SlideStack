@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1DBB7A8D1E854DA200D99FBB /* PublicProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DBB7A8C1E854D5600D99FBB /* PublicProtocols.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1DBB7A911E8957B000D99FBB /* minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DBB7A8F1E8957B000D99FBB /* minus.png */; };
+		1DBB7A921E8957B000D99FBB /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DBB7A901E8957B000D99FBB /* plus.png */; };
 		4B4802371E82B75D00272C15 /* SlideStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B48022D1E82B75C00272C15 /* SlideStack.framework */; };
 		4B48023C1E82B75D00272C15 /* SlideStackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B48023B1E82B75D00272C15 /* SlideStackTests.m */; };
 		4B48023E1E82B75D00272C15 /* SlideStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B4802301E82B75C00272C15 /* SlideStack.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -32,6 +34,8 @@
 
 /* Begin PBXFileReference section */
 		1DBB7A8C1E854D5600D99FBB /* PublicProtocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicProtocols.h; sourceTree = "<group>"; };
+		1DBB7A8F1E8957B000D99FBB /* minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minus.png; sourceTree = "<group>"; };
+		1DBB7A901E8957B000D99FBB /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		4B48022D1E82B75C00272C15 /* SlideStack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SlideStack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B4802301E82B75C00272C15 /* SlideStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SlideStack.h; sourceTree = "<group>"; };
 		4B4802311E82B75C00272C15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -67,6 +71,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1DBB7A8E1E8957B000D99FBB /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				1DBB7A8F1E8957B000D99FBB /* minus.png */,
+				1DBB7A901E8957B000D99FBB /* plus.png */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
 		4B4802231E82B75C00272C15 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +101,7 @@
 		4B48022F1E82B75C00272C15 /* SlideStack */ = {
 			isa = PBXGroup;
 			children = (
+				1DBB7A8E1E8957B000D99FBB /* resources */,
 				B526AF2C1E83BF82009C78CB /* PublicHeader.h */,
 				1DBB7A8C1E854D5600D99FBB /* PublicProtocols.h */,
 				4B4802301E82B75C00272C15 /* SlideStack.h */,
@@ -211,6 +225,8 @@
 			files = (
 				B526AF331E83BF88009C78CB /* SlideStackController.xib in Resources */,
 				B526AF461E83D2C4009C78CB /* SlideCell.xib in Resources */,
+				1DBB7A911E8957B000D99FBB /* minus.png in Resources */,
+				1DBB7A921E8957B000D99FBB /* plus.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

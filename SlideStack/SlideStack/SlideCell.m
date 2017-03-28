@@ -29,7 +29,7 @@
     [newCell.widthAnchor constraintEqualToConstant:CELL_WIDTH].active = true;
     
     newCell.backgroundColor = [UIColor clearColor];
-    newCell.cellColor = [UIColor blackColor];
+    newCell.cellColor = [UIColor grayColor];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:newCell
@@ -119,6 +119,10 @@
 
 -(void)executeCellFunctionality
 {
+    if (self.cellFunctionality == nil)
+    {
+        return;
+    }
     self.cellFunctionality();
 }
 
