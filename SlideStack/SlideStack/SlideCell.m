@@ -25,8 +25,10 @@
     newCell.cellState = CELL_STATE_COLAPSED;
     newCell.cellFunctionality = cellFunctionality;
     
-    [newCell.heightAnchor constraintEqualToConstant:CELL_HEIGHT].active = true;
-    [newCell.widthAnchor constraintEqualToConstant:CELL_WIDTH].active = true;
+    
+    
+    //[newCell.heightAnchor constraintEqualToConstant:CELL_HEIGHT].active = true;
+    //[newCell.widthAnchor constraintEqualToConstant:CELL_WIDTH].active = true;
     
     newCell.backgroundColor = [UIColor clearColor];
     newCell.cellColor = [UIColor grayColor];

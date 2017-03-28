@@ -12,6 +12,10 @@
 
 @interface SlideStackController ()
 @property NSMutableArray *cellList;
+-(void) moveCellUp:(SlideCell*)cell;
+-(void) moveCellDown:(SlideCell*)cell;
+-(void) moveNeighbouringCells:(NSInteger)index;
+-(void) restoreNeighbouringCells:(NSInteger) index;
 @end
 
 @implementation SlideStackController
@@ -103,18 +107,71 @@
     }
     [self refresh];
 }
-#pragma ----------PRIVATE------------
+#pragma mark PRIVATE
 
 -(void)formatCell:(SlideCell*)cell
 {
     NSInteger naturalCellIndex = [self.cellList indexOfObject:cell] + 1;
     CGRect newFrame = CGRectMake(-1 * COLAPSE_DISTANCE,
                                  START_TOP_MARGIN + (naturalCellIndex * CELL_HEIGHT) + ((long)self.cellMargin*naturalCellIndex),
-                                 cell.frame.size.width,
-                                 cell.frame.size.height);
-    cell.frame = newFrame;
+                                 CELL_WIDTH,
+                                 CELL_HEIGHT);
+    [UIView animateWithDuration:0.15
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         cell.frame = newFrame;
+                     }
+                     completion:nil];
     cell.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
-    NSLog(@"cell :%@ frame: %@", cell.titleLabel.text, [NSValue valueWithCGRect:newFrame]);
+}
+
+-(void) moveNeighbouringCells:(NSInteger) index
+{
+    if(index > 0)
+    {
+        [self moveCellUp:[[self cellList] objectAtIndex:index-1]];
+    }
+    if(index < [self.cellList count] - 1)
+    {
+        [self moveCellDown:[[self cellList] objectAtIndex:index+1]];
+    }
+}
+
+-(void) restoreNeighbouringCells:(NSInteger) index
+{
+    if(index > 0)
+    {
+        SlideCell* previous = [[self cellList] objectAtIndex:index-1];
+        [self formatCell:previous];
+    }
+    if(index < [self.cellList count] - 1)
+    {
+        SlideCell* next = [[self cellList] objectAtIndex:index+1];
+        [self formatCell:next];
+    }
+}
+
+-(void) moveCellUp:(SlideCell*)cell
+{
+    [UIView animateWithDuration:0.15
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         cell.frame = CGRectMake(cell.frame.origin.x,cell.frame.origin.y - CELL_MOVING_DISTANCE_UP, cell.frame.size.width , cell.frame.size.height - CELL_MOVING_DISTANCE_UP);
+                     }
+                     completion:nil];
+}
+
+-(void) moveCellDown:(SlideCell*)cell
+{
+    [UIView animateWithDuration:0.15
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         cell.frame = CGRectMake(cell.frame.origin.x,cell.frame.origin.y + CELL_MOVING_DISTANCE_DOWN, cell.frame.size.width , cell.frame.size.height - CELL_MOVING_DISTANCE_DOWN);
+                     }
+                     completion:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -148,6 +205,7 @@
     {
         cell.pointerStartDragCoordinatesX = [drag locationInView:cell.window].x;
         cell.cellStartDragCoordinatesX = cell.frame.origin.x;
+        [self moveNeighbouringCells:[[self cellList] indexOfObject:cell]];
     }
     float currentPointerDistance = [drag locationInView:cell.window].x - cell.pointerStartDragCoordinatesX;
     CGFloat offSet = cell.cellStartDragCoordinatesX + currentPointerDistance;
@@ -166,6 +224,7 @@
         [self collapseCell:cell];
     }
 }
+
 #pragma mark END DELEGATES
 
 -(void) executeCellAction:(SlideCell*)cell
@@ -198,6 +257,7 @@
          cell.frame = collapsedFrame;
      }
                     completion:nil];
+    [self restoreNeighbouringCells:[[self cellList] indexOfObject:cell]];
 }
 
 -(void) refresh

@@ -28,5 +28,8 @@
 #define ALPHA_COLOR 0.8
 #define WHITE_COLOR 0.3
 
+#define CELL_MOVING_DISTANCE_UP 10
+#define CELL_MOVING_DISTANCE_DOWN 20
+
 #define BOUNCE_PULL_DISTANCE -230
 #endif /* Defines_h */
