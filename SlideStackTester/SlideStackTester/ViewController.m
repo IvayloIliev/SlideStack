@@ -13,6 +13,7 @@
 @interface ViewController ()
 
 @property (strong, nonatomic) SlideStackController *slideStack;
+@property int count;
 
 @end
 
@@ -24,14 +25,13 @@
     UIImage *plusImage = [UIImage imageNamed:@"plus" inBundle:[NSBundle bundleWithIdentifier:@"net.nemetschek.SlideStack"] compatibleWithTraitCollection:nil];
     UIImage *minusImage = [UIImage imageNamed:@"minus" inBundle:[NSBundle bundleWithIdentifier:@"net.nemetschek.SlideStack"] compatibleWithTraitCollection:nil];
     UIColor *cyan = [UIColor colorWithRed:0/255.0 green:204/255.0 blue:204/255.0 alpha:1];
-    
-    SlideCell *cell2;
-    // Do any additional setup after loading the view, typically from a nib.
+
     self.slideStack = [[SlideStackController alloc] init];
     [self.view addSubview:self.slideStack.view];
-    
-    [self.slideStack setMargin:0];
-    
+
+    [self.slideStack setMargin:-15];
+    SlideCell *cell2;
+
     cell2 = [SlideCell getCell:^{
         SlideCell *cell3 = [SlideCell getCell:nil];
         [cell3 setBlock:^{
@@ -40,8 +40,9 @@
         
         cell3.delegate = self.slideStack;
         [cell3 setImage:minusImage];
-        [cell3 setTitle:@"CELL 3"];
-        [self.slideStack addSlideCell:cell3 atIndex:1];
+        [cell3 setTitle:[NSString stringWithFormat:@"Cell %i",_count]];
+        _count++;
+        [self.slideStack addSlideCell:cell3 atIndex:3];
     }];
     
     SlideCell *cell1 = [SlideCell getCell:^{
