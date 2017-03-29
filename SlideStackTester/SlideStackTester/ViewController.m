@@ -53,7 +53,7 @@
     
     [cell1 setTitle:@"CELL 1"];
     [self.slideStack addSlideCell:cell1];
-    cell1.cellColor = cyan;
+    [cell1 setColor:cyan];
     
     cell2.delegate = self.slideStack;
     [cell2 setImage:plusImage];

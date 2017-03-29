@@ -93,7 +93,7 @@
     }
 }
 
-#pragma mark DELEGATES
+#pragma mark Cell delegates
 
 -(void)onTap:(SlideCell *)cell
 {
@@ -107,10 +107,10 @@
                      animations:^
      {
          cell.frame = bounceFrame;
-         [self moveNeighbouringCells:cell];
+         [self pushNeighbouringCells:cell];
      }
                      completion:^(BOOL finished) {
-                         [self rearangeCells];
+                         [self pullNeighbouringCells:cell];
                      }];
 }
 
@@ -120,7 +120,7 @@
     {
         cell.pointerStartDragCoordinatesX = [drag locationInView:cell.window].x;
         cell.cellStartDragCoordinatesX = cell.frame.origin.x;
-        [self moveNeighbouringCells:cell];
+        [self pushNeighbouringCells:cell];
     }
     float currentPointerDistance = [drag locationInView:cell.window].x - cell.pointerStartDragCoordinatesX;
     CGFloat offSet = cell.cellStartDragCoordinatesX + currentPointerDistance;
@@ -132,11 +132,11 @@
     if(drag.state == UIGestureRecognizerStateEnded)
     {
         [self collapseCell:cell completion:^(BOOL finished) {
+            [self pullNeighbouringCells:cell];
             if(currentPointerDistance >= CELL_DRAG_TOLARANCE)
             {
                 [self executeCellAction:cell];
             }
-            [self rearangeCells];
         }];
     }
 }
@@ -167,7 +167,6 @@
 
 -(void)collapseCell:(SlideCell*)cell completion:(void (^ __nullable)(BOOL finished))completion
 {
-    cell.cellState = CELL_STATE_COLAPSED;
     [UIView animateWithDuration:0.5
                           delay:0
          usingSpringWithDamping:1
@@ -209,7 +208,7 @@
     }
 }
 
--(void) moveNeighbouringCells:(SlideCell*) cell
+-(void) pushNeighbouringCells:(SlideCell*) cell
 {
     NSInteger index = [[self cellList] indexOfObject:cell];
     if(index > 0)
@@ -219,6 +218,19 @@
     if(index < [self.cellList count] - 1)
     {
         [self moveCellUp:[[self cellList] objectAtIndex:index+1]];
+    }
+}
+
+-(void) pullNeighbouringCells:(SlideCell*) cell
+{
+    NSInteger index = [[self cellList] indexOfObject:cell];
+    if(index > 0)
+    {
+        [self refreshCell:[[self cellList] objectAtIndex:index-1]];
+    }
+    if(index < [self.cellList count] - 1)
+    {
+        [self refreshCell:[[self cellList] objectAtIndex:index+1]];
     }
 }
 

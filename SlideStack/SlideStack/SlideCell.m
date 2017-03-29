@@ -11,9 +11,8 @@
 
 @interface SlideCell ()
 
- @property void (^cellFunctionality)(void);
-
-
+@property void (^cellFunctionality)(void);
+@property UIColor *cellColor;
 @end
 
 @implementation SlideCell
@@ -21,13 +20,10 @@
 +(SlideCell *)getCell:(void (^)(void))cellFunctionality
 {
     SlideCell* newCell = [[[NSBundle bundleWithIdentifier:BUNDLE_ID_STRING] loadNibNamed:@"SlideCell" owner:self options:nil] firstObject];
-    
-    newCell.cellState = CELL_STATE_COLAPSED;
     newCell.cellFunctionality = cellFunctionality;
-    
     newCell.backgroundColor = [UIColor clearColor];
     newCell.cellColor = [UIColor grayColor];
-    
+
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:newCell
                                    action:@selector(tapped:)];
@@ -136,10 +132,5 @@
 -(void)setBlock:(void (^)(void))cellFunctionality
 {
     self.cellFunctionality = cellFunctionality;
-}
-
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"%@",self.titleLabel.text];
 }
 @end
