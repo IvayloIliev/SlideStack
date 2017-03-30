@@ -14,7 +14,7 @@ FOUNDATION_EXPORT double SlideStackVersionNumber;
 //! Project version string for SlideStack.
 FOUNDATION_EXPORT const unsigned char SlideStackVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like
+// In this header, you should import all the public headers of your framework
 #import <SlideStack/PublicHeader.h>
 
 

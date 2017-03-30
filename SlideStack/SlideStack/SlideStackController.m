@@ -12,11 +12,12 @@
 
 @interface SlideStackController ()
 @property NSMutableArray *cellList;
+@property NSInteger screenHeight;
 @end
 
 @implementation SlideStackController
 
--(instancetype)init
+- (instancetype)init
 {
     self = [super initWithNibName:@"SlideStackController" bundle:[NSBundle bundleWithIdentifier:BUNDLE_ID_STRING]];
     if (self)
@@ -27,17 +28,12 @@
     return self;
 }
 
--(void)setMargin:(NSInteger)margin
-{
-    self.cellMargin = margin;
-}
-
--(void) addSlideCell:(SlideCell*)newCell
+- (void)addSlideCell:(SlideCell *)newCell
 {
     [self addSlideCell:newCell atIndex:0];
 }
 
--(void) addSlideCell:(SlideCell*)newCell atIndex:(NSInteger)index;
+- (void)addSlideCell:(SlideCell *)newCell atIndex:(NSInteger)index;
 {
     if(index > [self.cellList count])
     {
@@ -47,28 +43,30 @@
     {
         [self.cellList insertObject:newCell atIndex:index];
     }
-    [self resizeView];
-    [self setFrameForAnimation:newCell];
+
+    newCell.frame = CGRectMake(-1 * CELL_WIDTH,
+                                 self.view.frame.size.height - index * (CELL_HEIGHT + self.cellMargin),
+                                 CELL_WIDTH,
+                                 CELL_HEIGHT);
     [self rearangeCells];
     [self.view addSubview:newCell];
 }
 
--(void) removeSlideCell:(SlideCell *)cell
+- (void)removeSlideCell:(SlideCell *)cell
 {
     NSInteger cellIndex = [self.cellList indexOfObject:cell];
     [self removeSlideCellAtIndex:cellIndex];
 }
 
--(void) removeSlideCellAtIndex:(NSInteger)index
+- (void)removeSlideCellAtIndex:(NSInteger)index
 {
     SlideCell *cell = [self.cellList objectAtIndex:index];
     [self removeCellAnimation:cell];
     [self.cellList removeObject:cell];
-    [self resizeView];
     [self rearangeCells];
 }
 
--(void) setCellProperties:(SlideCell*)cell withColor:(UIColor*) cellColor
+- (void)setCellProperties:(SlideCell *)cell withColor:(UIColor *) cellColor
 {
     if(cellColor && cell)
     {
@@ -76,7 +74,7 @@
     }
 }
 
--(void) setCellPropertiesAtIndex:(NSInteger)index withColor:(UIColor *)cellColor
+- (void)setCellPropertiesAtIndex:(NSInteger)index withColor:(UIColor *)cellColor
 {
     SlideCell *cell = [self.cellList objectAtIndex:index];
     if(cellColor && cell)
@@ -85,7 +83,7 @@
     }
 }
 
--(void) setControllerProperties:(NSInteger) margin
+- (void)setControllerProperties:(NSInteger) margin
 {
     if(margin)
     {
@@ -95,7 +93,7 @@
 
 #pragma mark Cell delegates
 
--(void)onTap:(SlideCell *)cell
+- (void)onTap:(SlideCell *)cell
 {
     CGRect bounceFrame = CGRectMake(BOUNCE_PULL_DISTANCE, cell.frame.origin.y, cell.frame.size.width , cell.frame.size.height);
     
@@ -114,7 +112,7 @@
                      }];
 }
 
--(void)drag:(UIPanGestureRecognizer *)drag onCell:(SlideCell *)cell
+- (void)drag:(UIPanGestureRecognizer *)drag onCell:(SlideCell *)cell
 {
     if(drag.state == UIGestureRecognizerStateBegan)
     {
@@ -143,7 +141,7 @@
 
 #pragma mark Private
 
--(void)resizeView
+- (void)resizeView
 {
     CGFloat screenHeight = [[UIScreen mainScreen] bounds].size.height;
     NSInteger cellsCount = [[self cellList] count];
@@ -151,21 +149,15 @@
     CGFloat frameHeight = cellsCount *(CELL_HEIGHT + self.cellMargin) - self.cellMargin;
     CGFloat x = 0;
     CGFloat y = screenHeight - VIEW_BOTTOM_MARGIN - frameHeight;
-    CGRect newFrame = CGRectMake(x,y,frameWidth,frameHeight);
-    self.view.frame = newFrame;
+    self.view.frame = CGRectMake(x,y,frameWidth,frameHeight);
 }
 
--(void) executeCellAction:(SlideCell*)cell
+- (void)executeCellAction:(SlideCell *)cell
 {
     [cell executeCellFunctionality];
 }
 
--(void)collapseCell:(SlideCell*)cell
-{
-    [self collapseCell:cell completion:nil];
-}
-
--(void)collapseCell:(SlideCell*)cell completion:(void (^ __nullable)(BOOL finished))completion
+- (void)collapseCell:(SlideCell *)cell completion:(void (^ __nullable)(BOOL finished))completion
 {
     [UIView animateWithDuration:0.5
                           delay:0
@@ -179,10 +171,10 @@
                     completion:completion];
 }
 
--(void) refreshCell:(SlideCell*) cell
+- (void)refreshCell:(SlideCell *)cell
 {
     NSInteger cellIndex = [self.cellList indexOfObject:cell];
-    CGRect newFrame = CGRectMake(-COLAPSE_DISTANCE,
+    CGRect newFrame = CGRectMake(-1 * COLAPSE_DISTANCE,
                                  self.view.frame.size.height - cellIndex * (CELL_HEIGHT + self.cellMargin) - CELL_HEIGHT,
                                  CELL_WIDTH,
                                  CELL_HEIGHT);
@@ -200,15 +192,16 @@
     cell.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
 }
 
--(void) rearangeCells
+- (void)rearangeCells
 {
+    [self resizeView];
     for (SlideCell* cell in self.cellList) {
         [self refreshCell:cell];
         [self.view bringSubviewToFront:cell];
     }
 }
 
--(void) pushNeighbouringCells:(SlideCell*) cell
+- (void)pushNeighbouringCells:(SlideCell *)cell
 {
     NSInteger index = [[self cellList] indexOfObject:cell];
     if(index > 0)
@@ -221,7 +214,7 @@
     }
 }
 
--(void) pullNeighbouringCells:(SlideCell*) cell
+- (void)pullNeighbouringCells:(SlideCell *)cell
 {
     NSInteger index = [[self cellList] indexOfObject:cell];
     if(index > 0)
@@ -234,7 +227,7 @@
     }
 }
 
--(void) moveCellUp:(SlideCell*)cell
+- (void)moveCellUp:(SlideCell *)cell
 {
     [UIView animateWithDuration:0.2
                           delay:0.0
@@ -245,7 +238,7 @@
                      completion:nil];
 }
 
--(void) moveCellDown:(SlideCell*)cell
+- (void)moveCellDown:(SlideCell *)cell
 {
     [UIView animateWithDuration:0.2
                           delay:0.0
@@ -258,28 +251,7 @@
 
 #pragma mark Animations
 
--(void) setFrameForAnimation:(SlideCell*)cell
-{
-    NSInteger cellIndex = [self.cellList indexOfObject:cell];
-    CGRect newFrame = CGRectMake(-1 * CELL_WIDTH,
-                                 self.view.frame.size.height - cellIndex * (CELL_HEIGHT + self.cellMargin) - CELL_HEIGHT,
-                                 CELL_WIDTH,
-                                 CELL_HEIGHT);
-    
-    [UIView animateWithDuration:0.5
-                          delay:0
-         usingSpringWithDamping:1
-          initialSpringVelocity:0.5
-                        options: UIViewAnimationOptionCurveLinear
-                     animations:^
-     {
-         cell.frame = newFrame;
-     }
-                     completion:nil];
-    
-}
-
--(void) removeCellAnimation:(SlideCell*) cell
+- (void)removeCellAnimation:(SlideCell *)cell
 {
     NSInteger cellIndex = [self.cellList indexOfObject:cell];
     

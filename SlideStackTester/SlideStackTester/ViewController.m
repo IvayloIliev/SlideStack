@@ -13,7 +13,8 @@
 @interface ViewController ()
 
 @property (strong, nonatomic) SlideStackController *slideStack;
-@property int count;
+@property NSInteger colorSaturation;
+@property NSInteger count;
 
 @end
 
@@ -24,12 +25,13 @@
     
     UIImage *plusImage = [UIImage imageNamed:@"plus" inBundle:[NSBundle bundleWithIdentifier:@"net.nemetschek.SlideStack"] compatibleWithTraitCollection:nil];
     UIImage *minusImage = [UIImage imageNamed:@"minus" inBundle:[NSBundle bundleWithIdentifier:@"net.nemetschek.SlideStack"] compatibleWithTraitCollection:nil];
-    UIColor *cyan = [UIColor colorWithRed:0/255.0 green:204/255.0 blue:204/255.0 alpha:1];
+    
+    _colorSaturation = 200;
 
     self.slideStack = [[SlideStackController alloc] init];
     [self.view addSubview:self.slideStack.view];
 
-    [self.slideStack setMargin:-15];
+    self.slideStack.cellMargin = -15;
     SlideCell *cell2;
 
     cell2 = [SlideCell getCell:^{
@@ -40,20 +42,26 @@
         
         cell3.delegate = self.slideStack;
         [cell3 setImage:minusImage];
-        [cell3 setTitle:[NSString stringWithFormat:@"Cell %i",_count]];
+        [cell3 setTitle:[NSString stringWithFormat:@"Cell %li",(long)_count]];
+        [cell3 setColor:[UIColor colorWithRed:0/255.0 green:_colorSaturation/255.0 blue:_colorSaturation/255.0 alpha:1]];
         _count++;
+        if(_colorSaturation >= 255)
+        {
+            _colorSaturation = 200;
+        }
+        _colorSaturation += 20;
+        
         [self.slideStack addSlideCell:cell3 atIndex:3];
     }];
     
     SlideCell *cell1 = [SlideCell getCell:^{
-        NSLog(@"CELL 1");
         [self.slideStack removeSlideCellAtIndex:1];
     }];
     cell1.delegate = self.slideStack;
     
     [cell1 setTitle:@"CELL 1"];
     [self.slideStack addSlideCell:cell1];
-    [cell1 setColor:cyan];
+    [cell1 setColor:[UIColor colorWithRed:0/255.0 green:_colorSaturation/255.0 blue:_colorSaturation/255.0 alpha:1]];
     
     cell2.delegate = self.slideStack;
     [cell2 setImage:plusImage];

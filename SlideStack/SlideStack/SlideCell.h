@@ -21,13 +21,13 @@
 @property float pointerStartDragCoordinatesX;
 @property float cellStartDragCoordinatesX;
 
-+(SlideCell*) getCell:(void (^)(void))cellFunctionality;
--(void)setBlock:(void (^)(void))cellFunctionality;
--(void)setDescription:(NSString *)description;
--(void)setImage:(UIImage *)image;
--(void)setTitle:(NSString *)title;
--(void)setColor:(UIColor *)color;
--(void)executeCellFunctionality;
++ (SlideCell*) getCell:(void (^)(void))cellFunctionality;
+- (void)setBlock:(void (^)(void))cellFunctionality;
+- (void)setDescription:(NSString *)description;
+- (void)setImage:(UIImage *)image;
+- (void)setTitle:(NSString *)title;
+- (void)setColor:(UIColor *)color;
+- (void)executeCellFunctionality;
 
 @end
 

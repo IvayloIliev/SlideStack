@@ -15,14 +15,20 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xBM-rH-C6l">
-                    <rect key="frame" x="104" y="20" width="127" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xBM-rH-C6l">
+                    <rect key="frame" x="137" y="5" width="108" height="28"/>
                     <attributedString key="attributedText">
-                        <fragment content="Awesome title                   ">
+                        <fragment content="Awesome title    ">
                             <attributes>
                                 <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <font key="NSFont" size="17" name="AmericanTypewriter"/>
+                                <font key="NSFont" size="15" name="ArialMT"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                            </attributes>
+                        </fragment>
+                        <fragment content="               ">
+                            <attributes>
+                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <font key="NSFont" size="15" name="ArialMT"/>
                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                 <integer key="NSUnderline" value="1"/>
                             </attributes>
@@ -30,28 +36,40 @@
                     </attributedString>
                     <nil key="highlightedColor"/>
                 </label>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Random awesome description" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aim-xg-SWM">
-                    <rect key="frame" x="104" y="35" width="138" height="39"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gvw-3r-9Bt">
+                    <rect key="frame" x="259" y="38" width="25" height="25"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </imageView>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Description" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aim-xg-SWM">
+                    <rect key="frame" x="128" y="38" width="113" height="42"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gvw-3r-9Bt">
-                    <rect key="frame" x="250" y="38" width="25" height="25"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </imageView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="aim-xg-SWM" firstAttribute="top" secondItem="xBM-rH-C6l" secondAttribute="bottom" constant="5" id="2cn-XD-1lg"/>
+                <constraint firstItem="xBM-rH-C6l" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="ANe-8Z-BsM"/>
+                <constraint firstItem="Gvw-3r-9Bt" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="3" id="Bcc-me-vjs"/>
+                <constraint firstAttribute="trailing" secondItem="Gvw-3r-9Bt" secondAttribute="trailing" constant="16" id="GmV-uK-mKP"/>
+                <constraint firstItem="aim-xg-SWM" firstAttribute="top" secondItem="Gvw-3r-9Bt" secondAttribute="top" id="Nh4-n6-0ab"/>
+                <constraint firstItem="xBM-rH-C6l" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="137" id="RXZ-zw-QV4"/>
+                <constraint firstAttribute="bottom" secondItem="aim-xg-SWM" secondAttribute="bottom" constant="20" id="RbT-6B-0Lg"/>
+                <constraint firstAttribute="trailing" secondItem="xBM-rH-C6l" secondAttribute="trailing" constant="55" id="cF3-Rc-iGv"/>
+                <constraint firstItem="Gvw-3r-9Bt" firstAttribute="leading" secondItem="aim-xg-SWM" secondAttribute="trailing" constant="18" id="iWA-q3-LFN"/>
+                <constraint firstItem="aim-xg-SWM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="128" id="l3z-JL-Zgz"/>
+                <constraint firstItem="Gvw-3r-9Bt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="38" id="nq5-e8-l8L"/>
+                <constraint firstAttribute="trailing" secondItem="aim-xg-SWM" secondAttribute="trailing" constant="59" id="oz9-cN-zTh"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="descriptionTextView" destination="aim-xg-SWM" id="Prh-uD-Hn0"/>
                 <outlet property="imageView" destination="Gvw-3r-9Bt" id="xtY-sS-mcF"/>
                 <outlet property="titleLabel" destination="xBM-rH-C6l" id="2C2-Vj-ktV"/>
             </connections>
-            <point key="canvasLocation" x="37" y="-131"/>
+            <point key="canvasLocation" x="22" y="-136"/>
         </view>
     </objects>
 </document>

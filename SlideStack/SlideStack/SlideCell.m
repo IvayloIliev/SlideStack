@@ -17,7 +17,7 @@
 
 @implementation SlideCell
 
-+(SlideCell *)getCell:(void (^)(void))cellFunctionality
++ (SlideCell *)getCell:(void (^)(void))cellFunctionality
 {
     SlideCell* newCell = [[[NSBundle bundleWithIdentifier:BUNDLE_ID_STRING] loadNibNamed:@"SlideCell" owner:self options:nil] firstObject];
     newCell.cellFunctionality = cellFunctionality;
@@ -37,17 +37,17 @@
     return newCell;
 }
 
--(void) tapped:(UITapGestureRecognizer*)tap
+- (void) tapped:(UITapGestureRecognizer*)tap
 {
     [self.delegate onTap:self];
 }
 
--(void)dragged:(UIPanGestureRecognizer*)drag
+- (void)dragged:(UIPanGestureRecognizer*)drag
 {
      [self.delegate drag:drag onCell:self];
 }
 
--(void)drawRect:(CGRect)rect
+- (void)drawRect:(CGRect)rect
 {
     UIBezierPath *trianglePath = [self drawTrianglePath:rect];
     CGFloat red, green, blue, alpha;
@@ -62,7 +62,7 @@
     [self addSubview:[self getGradientView:rect]];
 }
 
--(UIBezierPath*) drawTrianglePath:(CGRect)rect
+- (UIBezierPath*) drawTrianglePath:(CGRect)rect
 {
     UIBezierPath *path = [UIBezierPath bezierPath];
     [path moveToPoint:CGPointMake(rect.size.width - ARROW_WIDTH, 0)];
@@ -75,7 +75,7 @@
     return path;
 }
 
--(UIBezierPath*) drawBodyPath:(CGRect)rect
+- (UIBezierPath*) drawBodyPath:(CGRect)rect
 {
     UIBezierPath *path = [UIBezierPath bezierPath];
     [path moveToPoint:CGPointMake(rect.size.width/4,0)];
@@ -87,7 +87,7 @@
     return path;
 }
 
--(UIView*) getGradientView:(CGRect)rect
+- (UIView*) getGradientView:(CGRect)rect
 {
     CAGradientLayer *gradientMask = [CAGradientLayer layer];
     CGRect gradientFrame = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width/4, rect.size.height);
@@ -100,36 +100,35 @@
     return gradientView;
 }
 
--(void) setDescription:(NSString *)description
+- (void)setDescription:(NSString *)description
 {
     [self.descriptionTextView setText:description];
 }
 
--(void) setTitle:(NSString *)title
+- (void)setTitle:(NSString *)title
 {
     [self.titleLabel setText:title];
 }
 
--(void)executeCellFunctionality
+- (void)executeCellFunctionality
 {
-    if (self.cellFunctionality == nil)
+    if (self.cellFunctionality)
     {
-        return;
+        self.cellFunctionality();
     }
-    self.cellFunctionality();
 }
 
--(void) setImage:(UIImage *)image
+- (void)setImage:(UIImage *)image
 {
     [self.imageView setImage:image];
 }
 
--(void)setColor:(UIColor *)color
+- (void)setColor:(UIColor *)color
 {
     _cellColor = color;
 }
 
--(void)setBlock:(void (^)(void))cellFunctionality
+- (void)setBlock:(void (^)(void))cellFunctionality
 {
     self.cellFunctionality = cellFunctionality;
 }
